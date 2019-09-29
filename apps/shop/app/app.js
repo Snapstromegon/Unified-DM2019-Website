@@ -2,6 +2,7 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const passport = require('passport');
 const {requireLogin} = require('./utils.js');
+const {ShopItem, ShopItemOption} = require('../../../models/index.js');
 require('./passport.js');
 
 const session = require('express-session');
@@ -36,7 +37,7 @@ module.exports = options => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use('/static', express.static(__dirname + '/../static'));
+  app.use('/', express.static(__dirname + '/../static'));
 
   app.use(
     '/user',
@@ -45,6 +46,10 @@ module.exports = options => {
       res.status(200).end();
     }
   );
+
+  app.get('/', async (req, res) => {
+    res.render('pages/listItems.njk', {shopItems: await ShopItem.findAll({where:{}, include: [ShopItemOption]})})
+  });
 
   app.listen(options.port, err => {
     if (err) {

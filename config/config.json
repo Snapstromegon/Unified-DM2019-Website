@@ -23,6 +23,7 @@
     "cookie": {
       "domain": ""
     },
+    "loginUrl": "http://localhost:89",
     "secretConfig": "./secrets.json"
   },
   "production": {
@@ -49,6 +50,7 @@
     "cookie": {
       "domain": ""
     },
+    "loginUrl": "https://login.freestyledm2019.de",
     "loginDomain": "freestyledm2019.de",
     "secretConfig": "/home/odm2019/secrets.json"
   }

@@ -36,6 +36,7 @@ module.exports = class User extends Sequelize.Model {
 
   static associate(db) {
     this.belongsToMany(db.Role, { through: 'UserRoles' });
+    this.hasMany(db.ShopOrder);
   }
 
   // static async createDefaultUser(models) {

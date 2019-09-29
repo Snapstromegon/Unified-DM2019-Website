@@ -1,0 +1,16 @@
+{% extends "../base.njk" %}
+
+{% block main %}
+<div class="content">
+  {% for shopItem in shopItems %}
+    <h1>{{shopItem.label}}</h1>
+    <p>{{shopItem.price}}€</p>
+    <select>
+    {% for option in shopItem.ShopItemOptions %}
+    <option>{{option.label}}</option>
+    {% endfor %}
+    </select>
+    <input type="number" name="" id="">
+  {% endfor %}
+</div>
+{% endblock %}
