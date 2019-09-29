@@ -19,7 +19,10 @@ module.exports = class ShopOrder extends Sequelize.Model {
    */
   static init(sequelize, DataTypes) {
     return super.init(
-      {},
+      {
+        isPayed: { type: DataTypes.BOOLEAN, defaultValue: false },
+        hasToBePaid: { type: DataTypes.BOOLEAN, defaultValue: false }
+      },
       {
         sequelize
       }
@@ -29,6 +32,5 @@ module.exports = class ShopOrder extends Sequelize.Model {
   static associate(models) {
     this.belongsTo(models.User);
     this.hasMany(models.ShopOrderItemSelection);
-    this.hasOne(models.ShopPayment);
   }
 };
