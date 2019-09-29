@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/login.css" />
+    <script defer>
+      function updateACLink(elem) {
+        const link = document.querySelector('#acLink');
+        const wantedId = elem.value.split(' ')[0].slice(1);
+        link.href = `${
+          link.href.split('/registrants/')[0]
+        }/registrants/${wantedId}`;
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+        <div class="devider">
+            <div class="devider-blue"></div>
+            <div class="devider-red"></div>
+            <div class="devider-yellow"></div>
+          </div>
+      <h1>Freestyle DM 2019 Login</h1>
+
+      <p>
+        Unter
+        <a href="https://anmeldung.freestyledm2019.de"
+          >anmeldung.freestyledm2019.de</a
+        >
+        findest du unter<br />
+        "Meine Anmeldungen"<br />
+        > "Zusammenfassung ansehen" <br />
+        deinen "Access Code".
+      </p>
+      <p>Diesen verwendest du hier bitte als Passwort.</p>
+
+      {% if failedLogin %}
+      <p class="error">
+        Name oder Passwort falsch!
+      </p>
+      {% endif %}
+
+      <form action="" method="post">
+        <label for="name">Name:</label>
+        <input
+          type="search"
+          name="user[name]"
+          id="name"
+          list="userNames"
+          oninput="updateACLink(this)"
+        />
+        {# <datalist id="userNames">
+          {% for user in users %}
+            <option>
+            {% if user.registrant %}
+              #{{ user.registrant.iufId }}
+            {% endif %}
+            {{ user.name }}</option>
+          {% endfor %}
+        </datalist> #}
+        <datalist id="userNames">
+          {% for registrant in registrants %}
+            <option>#{{ registrant.iufId }} {{ registrant.User.name }}</option>
+          {% endfor %}
+        </datalist>
+        <p>
+          <a
+            id="acLink"
+            href="https://anmeldung.freestyledm2019.de/"
+            target="_blank"
+            >Link zum Accesscode</a
+          >
+        </p>
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="user[password]" />
+        <input type="submit" value="Login" />
+      </form>
+    </main>
+  </body>
+</html>

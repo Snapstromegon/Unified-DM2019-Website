@@ -1,0 +1,55 @@
+{
+  "development": {
+    "login": {
+      "express": {
+        "port": 89
+      }
+    },
+    "shop": {
+      "express": {
+        "port": 90
+      }
+    },
+    "db": {
+      "credentialsFile": "./.my.cnf",
+      "credentialsName": "client",
+      "database": "odm2019_dm2019",
+      "host": "localhost",
+      "dialect": "mariadb"
+    },
+    "sync": {
+      "updateInterval": 600000
+    },
+    "cookie": {
+      "domain": ""
+    },
+    "secretConfig": "./secrets.json"
+  },
+  "production": {
+    "login": {
+      "express": {
+        "port": 89
+      }
+    },
+    "shop": {
+      "express": {
+        "port": 90
+      }
+    },
+    "db": {
+      "credentialsFile": "/home/odm2019/.my.cnf",
+      "credentialsName": "client",
+      "database": "odm2019_dm2019",
+      "host": "localhost",
+      "dialect": "mariadb"
+    },
+    "sync": {
+      "updateInterval": 600000
+    },
+    "cookie": {
+      "domain": ""
+    },
+    "loginDomain": "freestyledm2019.de",
+    "secretConfig": "/home/odm2019/secrets.json"
+  }
+}
