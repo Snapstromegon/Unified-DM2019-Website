@@ -1,7 +1,11 @@
 const Sequelize = require('sequelize');
 const argon2 = require('argon2');
 
-module.exports = class ShopItem extends Sequelize.Model {
+module.exports = class ShopItemPicture extends Sequelize.Model {
+  async getTotalPrice() {
+    return (await this.getShopItem()).price + this.priceModificator;
+  }
+
   /**
    * Init Model
    * @param {Sequelize} sequelize
@@ -10,8 +14,8 @@ module.exports = class ShopItem extends Sequelize.Model {
   static init(sequelize, DataTypes) {
     return super.init(
       {
-        price: { type: DataTypes.FLOAT, allowNull: false, defaultValue: 0 },
-        label: { type: DataTypes.STRING, allowNull: false }
+        url: { type: DataTypes.STRING, allowNull: false },
+        label: { type: DataTypes.STRING }
       },
       {
         sequelize
@@ -20,7 +24,6 @@ module.exports = class ShopItem extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasMany(models.ShopItemOption);
-    this.hasMany(models.ShopItemPicture);
+    this.belongsTo(models.ShopItem);
   }
 };
