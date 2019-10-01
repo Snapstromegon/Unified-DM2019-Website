@@ -12,7 +12,9 @@ module.exports = class Registrant extends Sequelize.Model {
       {
         iufId: { type: Sequelize.INTEGER, allowNull: false, unique: true },
         type: { type: Sequelize.STRING, allowNull: false },
-        club: DataTypes.STRING
+        club: DataTypes.STRING,
+        email: DataTypes.STRING,
+        userEmail: DataTypes.STRING
       },
       {
         sequelize

@@ -4,11 +4,89 @@
 
 {% block css %}
 <link rel="stylesheet" href="/css/shoppingCart.css">
+<link rel="stylesheet" href="/css/listAllPayments.css">
 {%endblock%}
 
+{% macro maybeGrayedOutIcon(value, trueIcon='✔️', falseIcon=trueIcon, shouldGrayscale=true) %}
+<span {{"class=grayed" if not value and shouldGrayscale}}>{{trueIcon if value else falseIcon}}</span>
+{% endmacro %}
+
 {% block main %}
-<div class="content">
+{# <div class="content"> #}
   <h1>Bestellungsübersicht</h1>
-  
-</div>
+  <table class="beginn_table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>UserEmail</th>
+        <th>ZahlungsID</th>
+        <th>Muss gezahlt werden</th>
+        <th>Bezahlt</th>
+        <th>Ausgehändigt</th>
+        <th>Bestellung</th>
+        <th>Preis Gesamt</th>
+      </tr>
+    </thead>
+  {%for user in users %}
+    <tbody class="table_devider">
+      <tr>
+            <td rowspan="{{user.orders.length}}">{{user.name}}</td>
+            <td rowspan="{{user.orders.length}}">{{user.Registrant.email}}</td>
+            <td rowspan="{{user.orders.length}}">{{user.Registrant.userEmail}}</td>
+            <td>{{user.orders[0].paymentId}}</td>
+            <td>{{maybeGrayedOutIcon(user.orders[0].hasToBePaid, "✔️", "❌")}}</td>
+            <td>{{maybeGrayedOutIcon(user.orders[0].isPayed, "✔️", "❌", shouldGrayscale = not user.orders[0].hasToBePaid)}}</td>
+            <td>{{maybeGrayedOutIcon(user.orders[0].isHandedOut, "✔️", "❌", shouldGrayscale = not user.orders[0].isPayed)}}</td>
+            <td>
+              <table>
+                {% set items=user.orders[0].items%}
+                {% for item in items %}
+                  {% for option in item.ShopItemOptions %}
+                    <tr>
+                      <td>{{item.label}}</td>
+                      {% set optionTotalPrice=option.priceModificator + item.price %}
+                      <td class="right">{{option.label}}</td>
+                      <td class="right">{{optionTotalPrice}} €</td>
+                      <td class="right">{{option.ShopOrderItemSelections[0].count}}</td>
+                      <td class="right">{{optionTotalPrice * option.ShopOrderItemSelections[0].count}} €</td>
+                    </tr>
+                  {% endfor %}
+                {% endfor %}
+              </table>
+            </td>
+            
+            <td class="right">{{user.orders[0].totalPrice}} €</td>
+          </tr>
+      {%for order in user.orders.slice(1) %}
+          <tr>
+            <td>{{order.paymentId}}</td>
+            <td>{{maybeGrayedOutIcon(order.hasToBePaid, "✔️", "❌")}}</td>
+            <td>{{maybeGrayedOutIcon(order.isPayed, "✔️", "❌", shouldGrayscale = not order.hasToBePaid)}}</td>
+            <td>{{maybeGrayedOutIcon(order.isHandedOut, "✔️", "❌", shouldGrayscale = not order.isPayed)}}</td>
+            <td>
+              <table>
+                {% set items=order.items%}
+                {% for item in items %}
+                  {% for option in item.ShopItemOptions %}
+                    <tr>
+                      <td>{{item.label}}</td>
+                      {% set optionTotalPrice=option.priceModificator + item.price %}
+                      <td class="right">{{option.label}}</td>
+                      <td class="right">{{optionTotalPrice}} €</td>
+                      <td class="right">{{option.ShopOrderItemSelections[0].count}}</td>
+                      <td class="right">{{optionTotalPrice * option.ShopOrderItemSelections[0].count}} €</td>
+                    </tr>
+                  {% endfor %}
+                {% endfor %}
+              </table>
+            </td>
+            
+            <td class="right">{{order.totalPrice}} €</td>
+          </tr>
+    {%endfor%}
+    <tbody>
+      {% endfor %}
+  </table>
+{# </div> #}
 {% endblock %}

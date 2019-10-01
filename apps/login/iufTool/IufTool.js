@@ -60,24 +60,53 @@ module.exports = class IufTool {
       .trim();
   }
 
+  /**
+   * Gets the AccessCode of a single registrant
+   * @param {IufRegistrant} search Registrant to get the accessCode of
+   */
+  async getRegistrantDirectData({ iufId }) {
+    await this.loggedInPromise;
+    const response = await this.session.get(`${this.url}/registrants/${iufId}`);
+    const document = new JSDOM(response).window.document;
+    return {
+      password: document
+        .querySelector('.access_code')
+        .innerHTML.split('<b>')[0]
+        .trim(),
+      email: document
+        .querySelector('.contact_detail_summary')
+        .innerHTML.match(/\S+@\S+/)[0],
+      userEmail: document
+        .querySelector('.registrant_details_summary p')
+        .innerHTML.split('</b>')[1]
+        .trim()
+    };
+  }
+
   async syncIufToDb() {
     const iufRegistrants = await this.getAllRegistrants();
-  
+
     for (const iufRegistrant of iufRegistrants) {
       if (
-        (await Registrant.count({ where: { iufId: iufRegistrant.iufId } })) === 0
+        (await Registrant.count({ where: { iufId: iufRegistrant.iufId } })) ===
+        0
       ) {
+        const registrantData = await this.getRegistrantDirectData(
+          iufRegistrant
+        );
         const user = (await User.findOrCreate({
           where: { name: iufRegistrant.name },
           defaults: {
-            password: await this.getRegistrantAccessCode(iufRegistrant)
+            password: registrantData.password
           }
         }))[0];
         await user.save();
         const registrant = new Registrant({
           iufId: iufRegistrant.iufId,
           type: iufRegistrant.type,
-          club: iufRegistrant.club
+          club: iufRegistrant.club,
+          email: registrantData.email,
+          userEmail: registrantData.userEmail
         });
         await registrant.save();
         registrant.setUser(user);
@@ -85,7 +114,7 @@ module.exports = class IufTool {
       }
     }
   }
-  
+
   async keepIufAndDbInSync({ updateInterval }) {
     await this.syncIufToDb();
     setInterval(() => this.syncIufToDb(), updateInterval);

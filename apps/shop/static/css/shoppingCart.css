@@ -16,3 +16,7 @@ table input {
 .noPadding {
   padding: 0;
 }
+
+.grayed {
+  filter: grayscale(1);
+}

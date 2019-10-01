@@ -86,6 +86,7 @@ module.exports = class ShopOrder extends Sequelize.Model {
   static init(sequelize, DataTypes) {
     return super.init(
       {
+        isHandedOut: { type: DataTypes.BOOLEAN, defaultValue: false },
         isPayed: { type: DataTypes.BOOLEAN, defaultValue: false },
         hasToBePaid: { type: DataTypes.BOOLEAN, defaultValue: false }
       },
