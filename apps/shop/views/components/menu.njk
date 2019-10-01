@@ -1,7 +1,30 @@
+{% set navLinks = [
+  {
+    url: '/',
+    name: 'Startseite'
+  },
+  {
+    url: '/shoppingCart',
+    name: 'Warenkorb'
+  },
+  {
+    url: '/myOrders',
+    name: 'Bestellungen'
+  }
+]%}
 
-      <nav>
-        <a href="/" class="active">Startseite</a>
-        <a href="/ausschreibung.html">Ausschreibung</a>
-        <a href="/faq.html">FAQ</a>
-        <a href="https://anmeldung.freestyledm2019.de" target="_blank" rel="noopener">Anmeldung</a>
-      </nav>
+<nav>
+  {% for navLink in navLinks %}
+    <a href="{{navLink.url}}" {{ 'class=active' if navLink.name == currentPage }}>{{navLink.name}}</a>
+  {% endfor %}
+
+  {% if req.user %}
+    <a href="https://login.freestyledm2019.de/logout?redirectBack=https://shop.freestyledm2019.de">Logout</a>
+    {% if req.user.hasRole('Payment') %}
+      <h2>Payment</h2>
+      <a href="/admin/payment/listAll" {{ 'class=active' if "Payment All" == currentPage }}>Payment All</a>
+    {% endif %}
+  {%else%}
+    <a href="https://login.freestyledm2019.de/?redirectBack=https://shop.freestyledm2019.de">Login</a>
+  {% endif %}
+</nav>

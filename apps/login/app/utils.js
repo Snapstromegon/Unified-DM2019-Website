@@ -6,6 +6,16 @@ function requireLogin(req, res, next){
   }
 }
 
+function requireRole(role) {
+  return (req, res, next) => {
+    if(req.user.hasRole(role)){
+      next();
+    }
+    res.status(403).end();
+  }
+}
+
 module.exports = {
-  requireLogin
+  requireLogin,
+  requireRole
 }

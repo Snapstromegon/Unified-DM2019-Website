@@ -1,0 +1,71 @@
+{% set currentPage="Bestellbestätigung" %}
+
+{% extends "../base.njk" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/shoppingCart.css">
+{%endblock%}
+
+{% block main %}
+<div class="content">
+  <h1>Danke für deine Bestellung</h1>
+  <h2>Bestellübersicht</h2>
+  {% set items=order.items%}
+  {%if items.length > 0 %}
+  <table class="beginn_table">
+    <thead>
+      <tr>
+        <th>Produkt</th>
+        <th>Option</th>
+        <th>Preis/Stk.</th>
+        <th>Anzahl</th>
+        <th>Preis Gesamt</th>
+      </tr>
+    </thead>
+      {% for item in items %}
+    <tbody class="table_devider">
+        <tr>
+          <td rowspan="{{item.ShopItemOptions.length}}">{{item.label}}</td>
+          {% set optionTotalPrice=item.ShopItemOptions[0].priceModificator + item.price %}
+          <td class="right">{{item.ShopItemOptions[0].label}}</td>
+          <td class="right">{{optionTotalPrice}} €</td>
+          <td class="right">{{item.ShopItemOptions[0].ShopOrderItemSelections[0].count}}</td>
+          <td class="right">{{optionTotalPrice * item.ShopItemOptions[0].ShopOrderItemSelections[0].count}} €</td>
+        </tr>
+        {% for option in item.ShopItemOptions.slice(1) %}
+          <tr>
+            {% set optionTotalPrice=option.priceModificator + item.price %}
+            <td class="right">{{option.label}}</td>
+            <td class="right">{{optionTotalPrice}} €</td>
+            <td class="right">{{option.ShopOrderItemSelections[0].count}}</td>
+            <td class="right">{{optionTotalPrice * option.ShopOrderItemSelections[0].count}} €</td>
+          </tr>
+        {% endfor %}
+    <tbody>
+      {% endfor %}
+    <tfooter>
+      <tr>
+        <td>Gesamt</td>
+        <td></td>
+        <td></td>
+        <td class="right">{{order.itemCount}}</td>
+        <td class="right">{{order.totalPrice}} €</td>
+      </tr>
+    </tfooter>
+  </table>
+  {% else %}
+    <p>Du hast noch nichts im Warenkorb.</p>
+    {%endif%}
+  <h2>Zahlungsinformationen</h2>
+  <p>Bestell ID: {{order.id}}</p>
+
+  <h3>Bitte überweise bis zum 30.10.2019 den oben genannten Betrag an filgendes Konto</h3>
+  <p>
+    Kontoinhaber: Peter Kaufmann<br>
+    IBAN: DE65 1203 0000 1060 4054 85<br>
+    BIC: BYLADEM1001<br>
+    Institut: Deutsche Kreditbank Berlin
+  </p>
+  <h4>Dein Zahlungsbetreff: {{order.paymentId}}</h4>
+</div>
+{% endblock %}

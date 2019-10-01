@@ -1,0 +1,76 @@
+{% set currentPage="Warenkorb" %}
+
+{% extends "../base.njk" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/shoppingCart.css">
+{%endblock%}
+
+{% block main %}
+<div class="content">
+  <h1>Dein Warenkorb</h1>
+  {% set items=order.items%}
+  {%if items.length > 0 %}
+    <form action="/shoppingCart" method="post">
+  <table class="beginn_table">
+    <thead>
+      <tr>
+        <th>Produkt</th>
+        <th>Option</th>
+        <th>Preis/Stk.</th>
+        <th>Anzahl</th>
+        <th>Preis Gesamt</th>
+      </tr>
+    </thead>
+      {% for item in items %}
+    <tbody class="table_devider">
+        <tr>
+          <td rowspan="{{item.ShopItemOptions.length}}">{{item.label}}</td>
+          {% set optionTotalPrice=item.ShopItemOptions[0].priceModificator + item.price %}
+          <td class="right">{{item.ShopItemOptions[0].label}}</td>
+          <td class="right">{{optionTotalPrice}} €</td>
+          <td class="right noPadding">
+            <input type="number" min=0 oninput="valueChanged()" value="{{item.ShopItemOptions[0].ShopOrderItemSelections[0].count}}" name='selectOption[#{{item.ShopItemOptions[0].id}}]'>
+          </td>
+          <td class="right">{{optionTotalPrice * item.ShopItemOptions[0].ShopOrderItemSelections[0].count}} €</td>
+        </tr>
+        {% for option in item.ShopItemOptions.slice(1) %}
+          <tr>
+            {% set optionTotalPrice=option.priceModificator + item.price %}
+            <td class="right">{{option.label}}</td>
+            <td class="right">{{optionTotalPrice}} €</td>
+            <td class="right noPadding">
+              <input type="number" min=0 oninput="valueChanged()" value="{{option.ShopOrderItemSelections[0].count}}" name='selectOption[#{{option.id}}]'>
+            </td>
+            <td class="right">{{optionTotalPrice * option.ShopOrderItemSelections[0].count}} €</td>
+          </tr>
+        {% endfor %}
+    <tbody>
+      {% endfor %}
+    <tfooter>
+      <tr>
+        <td>Gesamt</td>
+        <td></td>
+        <td></td>
+        <td class="right">{{order.itemCount}}</td>
+        <td class="right">{{order.totalPrice}} €</td>
+      </tr>
+    </tfooter>
+  </table>
+  <script defer>
+    function valueChanged(){
+      document.querySelector('#saveChanges').hidden=false;
+      document.querySelector('#commitOrder').hidden=true;
+    }
+  </script>
+  <div class="flexFullWidth">
+    <a href="/">Weiter einkaufen</a>
+    <input type="submit" value="Änderungen Speichern" id="saveChanges" hidden>
+    <a href="/commitOrder" id="commitOrder">Zahlungspflichtig Bestellen</a>
+  </div>
+  </form>
+  {% else %}
+    <p>Du hast noch nichts im Warenkorb.</p>
+    {%endif%}
+</div>
+{% endblock %}

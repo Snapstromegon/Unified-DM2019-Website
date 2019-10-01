@@ -1,8 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const passport = require('passport');
-const {requireLogin} = require('./utils.js');
-const {ShopItem, ShopItemOption} = require('../../../models/index.js');
+const { requireLogin } = require('./utils.js');
 require('./passport.js');
 
 const session = require('express-session');
@@ -39,17 +38,9 @@ module.exports = options => {
 
   app.use('/', express.static(__dirname + '/../static'));
 
-  app.use(
-    '/user',
-    requireLogin,
-    (req, res) => {
-      res.status(200).end();
-    }
-  );
+  app.use('/', require('./shopRouter.js'));
 
-  app.get('/', async (req, res) => {
-    res.render('pages/listItems.njk', {shopItems: await ShopItem.findAll({where:{}, include: [ShopItemOption]})})
-  });
+  app.use('/admin', requireLogin, require('./adminRouter.js'));
 
   app.listen(options.port, err => {
     if (err) {

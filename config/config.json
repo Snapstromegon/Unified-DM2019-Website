@@ -21,7 +21,7 @@
       "updateInterval": 600000
     },
     "cookie": {
-      "domain": ""
+      "domain": "127.0.0.1"
     },
     "loginUrl": "http://localhost:89",
     "secretConfig": "./secrets.json"

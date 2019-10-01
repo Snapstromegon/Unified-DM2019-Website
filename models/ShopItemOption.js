@@ -2,8 +2,8 @@ const Sequelize = require('sequelize');
 const argon2 = require('argon2');
 
 module.exports = class ShopItemOption extends Sequelize.Model {
-  async getTotalPrice() {
-    return (await this.getShopItem()).price + this.priceModificator;
+  get totalPrice() {
+    return this.ShopItem.price + this.priceModificator;
   }
 
   /**
@@ -25,5 +25,6 @@ module.exports = class ShopItemOption extends Sequelize.Model {
 
   static associate(models) {
     this.belongsTo(models.ShopItem);
+    this.hasMany(models.ShopOrderItemSelection);
   }
 };

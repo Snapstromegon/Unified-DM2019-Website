@@ -76,7 +76,7 @@ aside nav {
   justify-content: center;
 }
 
-aside a {
+aside a, aside h2 {
   color: #fff;
   text-decoration: none;
   text-align: center;
@@ -85,6 +85,10 @@ aside a {
   position: relative;
   transition: background 0.2s;
   background: none;
+}
+
+aside h2 {
+  display: none;
 }
 
 aside a:hover {
@@ -228,9 +232,12 @@ header #logo {
     grid-auto-columns: 1fr;
   }
 
-  aside a, footer a {
+  aside a, footer a, aside h2, footer h2 {
     text-align: left;
     padding: 0.5rem 1rem;
+  }
+  aside h2 {
+    display: initial;
   }
 
   aside a::before{
@@ -475,7 +482,7 @@ footer a.active {
   vertical-align: top;
 }
 
-.beginn_table td[rowspan="3"]{
+.beginn_table td[rowspan]{
   background-color: #555;
 }
 

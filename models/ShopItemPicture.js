@@ -2,9 +2,6 @@ const Sequelize = require('sequelize');
 const argon2 = require('argon2');
 
 module.exports = class ShopItemPicture extends Sequelize.Model {
-  async getTotalPrice() {
-    return (await this.getShopItem()).price + this.priceModificator;
-  }
 
   /**
    * Init Model

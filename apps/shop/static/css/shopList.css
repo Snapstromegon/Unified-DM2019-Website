@@ -1,0 +1,33 @@
+.shopItemList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-gap:1rem;
+}
+
+.shopItemPreview {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: "picture picture" "label price";
+  text-decoration: none;
+  color: #000;
+  box-shadow: 0 .1rem .2rem #0008;
+  border-radius: .2rem;
+  align-items: end;
+  overflow: hidden;
+  padding: .5rem;
+}
+
+.shopItemPreview img{
+  max-width: 100%;
+  grid-area: picture;
+  align-self: start;
+}
+
+.shopItemPreview .label {
+  grid-area: label;
+}
+
+.shopItemPreview .price {
+  grid-area: price;
+}

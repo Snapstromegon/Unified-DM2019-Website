@@ -1,0 +1,50 @@
+
+{% extends "../base.njk" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/orderItem.css">
+{%endblock%}
+
+{% block main %}
+<script defer>
+  function show(pic){
+    document.querySelector('#mainImage').src=pic.src;
+    document.querySelector('#mainImageLink').href=pic.src;
+    document.querySelector('.selected').classList.remove('selected');
+    pic.classList.add('selected');
+  }
+</script>
+<div class="content">
+  <div class="orderItemDetails">
+    <div class="images">
+      <a href="/res/shopItemPictures/1.jpg" target="_blank" id="mainImageLink"><img src="/res/shopItemPictures/1.jpg" alt="{{shopItem.label}}" id="mainImage"></a>
+      <div class="imgPreview">
+        <img src="/res/shopItemPictures/1.jpg" alt="{{shopItem.label}}" class="selected" onclick="show(this)">
+        <img src="/res/shopItemPictures/1-back.jpg" alt="{{shopItem.label}}" onclick="show(this)">
+      </div>
+    </div>
+    <h1>{{shopItem.label}}</h1>
+    <h2 class="price">{{shopItem.price}}€</h2>
+    <form action="/shoppingCart" method="post">
+  <table>
+    <thead>
+      <tr>
+        <th>Größe</th>
+        <th>Anzahl</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for option in shopItem.ShopItemOptions %}
+      <tr>
+        <td class="right">{{option.label}}</td>
+        <td><input type="number" name='selectOption[#{{option.id}}]' id="" value="{{counts[option.id] or 0}}" min=0></td>
+      </tr>
+    {%endfor%}
+    </tbody>
+  </table>
+  <input type="submit" value="Im Warenkorb speichern">
+  </form>
+  </div>
+  
+</div>
+{% endblock %}

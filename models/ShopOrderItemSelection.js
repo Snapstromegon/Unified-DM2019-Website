@@ -3,8 +3,8 @@ const argon2 = require('argon2');
 
 module.exports = class ShopOrderItemSelection extends Sequelize.Model {
   
-  async getTotalPrice() {
-    return (await this.getShopItemOption()).getTotalPrice() * this.count;
+  get totalPrice() {
+    return this.ShopItemOption.totalPrice * this.count;
   }
 
   /**

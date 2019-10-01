@@ -6,6 +6,10 @@ module.exports = class User extends Sequelize.Model {
     return argon2.verify(this.password, password);
   }
 
+  hasRole(roleName){
+    return this.Roles.find(role => role.name == roleName) !== undefined;
+  }
+
   /**
    * Init Model
    * @param {Sequelize} sequelize
