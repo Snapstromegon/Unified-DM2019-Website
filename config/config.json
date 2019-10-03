@@ -1,11 +1,13 @@
 {
   "development": {
     "login": {
+      "url": "https://login.freestyledm2019.de",
       "express": {
         "port": 89
       }
     },
     "shop": {
+      "url": "https://shop.freestyledm2019.de",
       "express": {
         "port": 90
       }
@@ -28,11 +30,13 @@
   },
   "production": {
     "login": {
+      "url": "https://login.freestyledm2019.de",
       "express": {
         "port": 9090
       }
     },
     "shop": {
+      "url": "https://shop.freestyledm2019.de",
       "express": {
         "port": 9091
       }
