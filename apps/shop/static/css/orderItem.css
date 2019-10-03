@@ -1,7 +1,7 @@
 .orderItemDetails {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: 'label' 'price' 'picture' 'imgPreview';
+  grid-template-areas: 'label' 'price' 'description' 'picture' 'imgPreview';
   grid-gap: 1rem;
 }
 
@@ -17,6 +17,10 @@
 
 .orderItemDetails .price {
   grid-area: price;
+}
+
+.orderItemDetails .description {
+  grid-area: description;
 }
 
 .imgPreview {
@@ -41,7 +45,7 @@
 @media (min-width: 850px) {
   .orderItemDetails {
     grid-template-columns: 20rem 1fr;
-    grid-template-rows: auto auto 1fr;
-    grid-template-areas: 'picture label' 'picture price' 'picture .';
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas: 'picture label' 'picture price' 'picture description' 'picture .';
   }
 }

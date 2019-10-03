@@ -1,6 +1,6 @@
 {% set currentPage="Payment All" %}
 
-{% extends "../../../base.njk" %}
+{% extends "../../base.njk" %}
 
 {% block css %}
 <link rel="stylesheet" href="/css/shoppingCart.css">
@@ -9,6 +9,39 @@
 
 {% macro maybeGrayedOutIcon(value, trueIcon='✔️', falseIcon=trueIcon, shouldGrayscale=true) %}
 <span {{"class=grayed" if not value and shouldGrayscale}}>{{trueIcon if value else falseIcon}}</span>
+{% endmacro %}
+
+{% macro orderStatusLinkOrText(text, role, link) %}
+  {%if req.user.hasRole(role)%}
+    <a href="{{link}}">{{text}}</a>
+  {%else%}
+    {{text}}
+  {%endif%}
+{%endmacro%}
+
+{% macro orderStatus(order) %}
+  <td>{{maybeGrayedOutIcon(order.hasToBePaid, "✔️", "❌")}}</td>
+  <td>{{
+    orderStatusLinkOrText(
+      maybeGrayedOutIcon(
+        order.isPayed, "✔️", "❌", shouldGrayscale = not order.hasToBePaid
+      ),
+      "Payment", 
+      "/admin/payment/pay/" + order.id+"/"+(not order.isPayed)
+    )}}</td>
+  {%if order.isPayed%}
+  <td>{{orderStatusLinkOrText(
+    maybeGrayedOutIcon(
+      order.isHandedOut, "✔️", "❌", shouldGrayscale = not order.isPayed
+    ), 
+    "Handout", 
+    "/admin/handout/handout/" + order.id+"/"+(not order.isHandedOut)
+  )}}</td>
+  {%else%}
+<td>{{maybeGrayedOutIcon(
+      order.isHandedOut, "✔️", "❌", shouldGrayscale = not order.isPayed
+    )}}</td>
+  {%endif%}
 {% endmacro %}
 
 {% block main %}
@@ -35,9 +68,7 @@
             <td rowspan="{{user.orders.length}}">{{user.Registrant.email}}</td>
             <td rowspan="{{user.orders.length}}">{{user.Registrant.userEmail}}</td>
             <td>{{user.orders[0].paymentId}}</td>
-            <td>{{maybeGrayedOutIcon(user.orders[0].hasToBePaid, "✔️", "❌")}}</td>
-            <td>{{maybeGrayedOutIcon(user.orders[0].isPayed, "✔️", "❌", shouldGrayscale = not user.orders[0].hasToBePaid)}}</td>
-            <td>{{maybeGrayedOutIcon(user.orders[0].isHandedOut, "✔️", "❌", shouldGrayscale = not user.orders[0].isPayed)}}</td>
+            {{orderStatus(user.orders[0])}}
             <td>
               <table>
                 {% set items=user.orders[0].items%}
@@ -61,9 +92,7 @@
       {%for order in user.orders.slice(1) %}
           <tr>
             <td>{{order.paymentId}}</td>
-            <td>{{maybeGrayedOutIcon(order.hasToBePaid, "✔️", "❌")}}</td>
-            <td>{{maybeGrayedOutIcon(order.isPayed, "✔️", "❌", shouldGrayscale = not order.hasToBePaid)}}</td>
-            <td>{{maybeGrayedOutIcon(order.isHandedOut, "✔️", "❌", shouldGrayscale = not order.isPayed)}}</td>
+            {{orderStatus(order)}}
             <td>
               <table>
                 {% set items=order.items%}

@@ -17,7 +17,7 @@ Produkte müssen vorab gezahlt werden und werden dann an der Veranstaltung ausge
 <div class="shopItemList">
   {% for shopItem in shopItems %}
     <a href="/orderItem/{{shopItem.id}}" class="shopItemPreview">
-    <img src="/res/shopItemPictures/1.jpg" alt="{{shopItem.label}}">
+    <img src="{{shopItem.ShopItemPictures[0].url}}" alt="{{shopItem.label}} - {{shopItem.ShopItemPictures[0].label}}">
     <p class="label">{{shopItem.label}}</p>
     <p class="price">{{shopItem.price}}€</p>
     </a>

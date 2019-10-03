@@ -11,7 +11,8 @@ module.exports = class ShopItem extends Sequelize.Model {
     return super.init(
       {
         price: { type: DataTypes.FLOAT, allowNull: false, defaultValue: 0 },
-        label: { type: DataTypes.STRING, allowNull: false }
+        label: { type: DataTypes.STRING, allowNull: false },
+        description: DataTypes.STRING
       },
       {
         sequelize

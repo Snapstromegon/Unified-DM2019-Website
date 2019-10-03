@@ -17,10 +17,11 @@ async function main() {
     console.log('✔️ Connected to IUF Tool');
 
     console.log('🕐 Syncing IUF Tool User Base');
-    await iufTool.keepIufAndDbInSync({
-      updateInterval: config.sync.updateInterval
-    });
-    console.log('✔️ Syncing IUF Tool User Base');
+    iufTool
+      .keepIufAndDbInSync({
+        updateInterval: config.sync.updateInterval
+      })
+      .then(() => console.log('✔️ Syncing IUF Tool User Base'));
   } catch (err) {
     console.error('❌ Connection to IUF Failed', err);
   }

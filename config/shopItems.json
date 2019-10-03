@@ -2,35 +2,29 @@
   {
     "label": "Kinder T-Shirt",
     "price": 24,
-    "options": [
-      "116 (XXXS)",
-      "128 (XXS)",
-      "140",
-      "152 (XS)",
-      "164"
+    "options": ["116 (XXXS)", "128 (XXS)", "140", "152 (XS)", "164"],
+    "pictures": [
+      { "label": "Vorne", "url": "/res/shopItemPictures/design-front.jpg" },
+      { "label": "Hinten", "url": "/res/shopItemPictures/design-back.jpg" }
     ]
   },
   {
     "label": "Damen T-Shirt",
     "price": 24,
-    "options": [
-      "36 (S)",
-      "38 (M)",
-      "40 (L)",
-      "42 (XL)",
-      "44 (XXL)"
+    "description": "Tailliert geschnitten",
+    "options": ["36 (S)", "38 (M)", "40 (L)", "42 (XL)", "44 (XXL)"],
+    "pictures": [
+      { "label": "Vorne", "url": "/res/shopItemPictures/design-front.jpg" },
+      { "label": "Hinten", "url": "/res/shopItemPictures/design-back.jpg" }
     ]
   },
   {
     "label": "Herren / Unisex T-Shirt",
     "price": 24,
-    "options": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "XXL",
-      "XXXL"
+    "options": ["S", "M", "L", "XL", "XXL", "XXXL"],
+    "pictures": [
+      { "label": "Vorne", "url": "/res/shopItemPictures/design-front.jpg" },
+      { "label": "Hinten", "url": "/res/shopItemPictures/design-back.jpg" }
     ]
   }
 ]

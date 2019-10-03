@@ -6,8 +6,10 @@ module.exports = class User extends Sequelize.Model {
     return argon2.verify(this.password, password);
   }
 
-  hasRole(roleName){
-    return this.Roles.find(role => role.name == roleName) !== undefined;
+  hasRole(roleName) {
+    return (
+      this.Roles.find(role => role.name == roleName || 'Admin') !== undefined
+    );
   }
 
   /**
@@ -36,7 +38,6 @@ module.exports = class User extends Sequelize.Model {
       }
     );
   }
-
 
   static associate(db) {
     this.belongsToMany(db.Role, { through: 'UserRoles' });

@@ -6,13 +6,14 @@ const {
   ShopItem,
   ShopItemOption,
   ShopOrder,
-  ShopOrderItemSelection
+  ShopOrderItemSelection,
+  ShopItemPicture
 } = require('../../../models/index.js');
 
 router.get('/', async (req, res) => {
   res.render('pages/listItems.njk', {
     req,
-    shopItems: await ShopItem.findAll({ where: {} })
+    shopItems: await ShopItem.findAll({ where: {}, include:[ShopItemPicture] })
   });
 });
 
@@ -22,7 +23,7 @@ router.get('/orderItem/:itemId', async (req, res) => {
       {
         model: ShopItemOption,
         order: [['id', 'ASC']]
-      }
+      }, ShopItemPicture
     ]
   });
   let counts = {};

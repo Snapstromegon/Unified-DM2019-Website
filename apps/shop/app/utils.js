@@ -16,7 +16,18 @@ function requireRole(role) {
   }
 }
 
+function requireOneOfRoles(...roles){
+  return function (req, res, next) {
+    if(roles.find(role => req.user.hasRole(role))){
+      next();
+    } else {
+      res.status(403).end();
+    }
+  }
+}
+
 module.exports = {
   requireLogin,
-  requireRole
+  requireRole,
+  requireOneOfRoles
 }

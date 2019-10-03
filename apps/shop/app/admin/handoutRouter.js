@@ -6,9 +6,9 @@ const {
 } = require('../../../../models/index.js');
 
 
-router.get("/pay/:id/:state", async (req, res) => {
+router.get("/handout/:id/:state", async (req, res) => {
   const order = await ShopOrder.findByPk(parseInt(req.params.id));
-  order.isPayed = req.params.state == 'true';
+  order.isHandedOut = req.params.state == 'true';
   await order.save();
   res.redirect('/admin/listAll');
 });

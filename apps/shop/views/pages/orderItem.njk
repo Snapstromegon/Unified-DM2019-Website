@@ -17,14 +17,17 @@
 <div class="content">
   <div class="orderItemDetails">
     <div class="images">
-      <a href="/res/shopItemPictures/1.jpg" target="_blank" id="mainImageLink"><img src="/res/shopItemPictures/1.jpg" alt="{{shopItem.label}}" id="mainImage"></a>
+      <a href="{{shopItem.ShopItemPictures[0].url}}"target="_blank" id="mainImageLink"><img src="{{shopItem.ShopItemPictures[0].url}}" alt="{{shopItem.label}} - {{shopItem.ShopItemPictures[0].label}}" id="mainImage"></a>
       <div class="imgPreview">
-        <img src="/res/shopItemPictures/1.jpg" alt="{{shopItem.label}}" class="selected" onclick="show(this)">
-        <img src="/res/shopItemPictures/1-back.jpg" alt="{{shopItem.label}}" onclick="show(this)">
+        <img src="{{shopItem.ShopItemPictures[0].url}}" alt="{{shopItem.label}} - {{shopItem.ShopItemPictures[0].label}}" class="selected" onclick="show(this)">
+        {% for picture in shopItem.ShopItemPictures.slice(1) %}
+          <img src="{{picture.url}}" alt="{{shopItem.label}} - {{picture.label}}" onclick="show(this)">
+        {%endfor%}
       </div>
     </div>
     <h1>{{shopItem.label}}</h1>
     <h2 class="price">{{shopItem.price}}€</h2>
+    <p class="description">{{shopItem.description}}</p>
     <form action="/shoppingCart" method="post">
   <table>
     <thead>
