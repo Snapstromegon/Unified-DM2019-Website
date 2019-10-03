@@ -31,3 +31,13 @@
 .shopItemPreview .price {
   grid-area: price;
 }
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  padding:1rem 0 1rem 0;
+}
+
+.images img {
+  height: 15rem;
+}

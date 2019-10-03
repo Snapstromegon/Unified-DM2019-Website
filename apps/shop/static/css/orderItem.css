@@ -41,11 +41,3 @@
 .images {
   grid-area: picture;
 }
-
-@media (min-width: 850px) {
-  .orderItemDetails {
-    grid-template-columns: 20rem 1fr;
-    grid-template-rows: auto auto auto 1fr;
-    grid-template-areas: 'picture label' 'picture price' 'picture description' 'picture .';
-  }
-}

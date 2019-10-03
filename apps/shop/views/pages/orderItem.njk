@@ -6,25 +6,10 @@
 {%endblock%}
 
 {% block main %}
-<script defer>
-  function show(pic){
-    document.querySelector('#mainImage').src=pic.src;
-    document.querySelector('#mainImageLink').href=pic.src;
-    document.querySelector('.selected').classList.remove('selected');
-    pic.classList.add('selected');
-  }
-</script>
+
 <div class="content">
   <div class="orderItemDetails">
-    <div class="images">
-      <a href="{{shopItem.ShopItemPictures[0].url}}"target="_blank" id="mainImageLink"><img src="{{shopItem.ShopItemPictures[0].url}}" alt="{{shopItem.label}} - {{shopItem.ShopItemPictures[0].label}}" id="mainImage"></a>
-      <div class="imgPreview">
-        <img src="{{shopItem.ShopItemPictures[0].url}}" alt="{{shopItem.label}} - {{shopItem.ShopItemPictures[0].label}}" class="selected" onclick="show(this)">
-        {% for picture in shopItem.ShopItemPictures.slice(1) %}
-          <img src="{{picture.url}}" alt="{{shopItem.label}} - {{picture.label}}" onclick="show(this)">
-        {%endfor%}
-      </div>
-    </div>
+    
     <h1>{{shopItem.label}}</h1>
     <h2 class="price">{{shopItem.price}}€</h2>
     <p class="description">{{shopItem.description}}</p>
