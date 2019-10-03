@@ -55,7 +55,7 @@
       "domain": ""
     },
     "loginUrl": "https://login.freestyledm2019.de",
-    "loginDomain": "freestyledm2019.de",
+    "loginDomain": "https://freestyledm2019.de",
     "secretConfig": "/home/odm2019/secrets.json"
   }
 }
