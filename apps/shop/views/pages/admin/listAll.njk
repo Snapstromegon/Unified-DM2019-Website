@@ -42,6 +42,13 @@
       order.isHandedOut, "✔️", "❌", shouldGrayscale = not order.isPayed
     )}}</td>
   {%endif%}
+  <td>{{orderStatusLinkOrText(
+    maybeGrayedOutIcon(
+      req.user.hasRole("OrderManager"), "🚮"
+    ), 
+    "OrderManager", 
+    "/admin/orders/delete/" + order.id
+  )}}</td>
 {% endmacro %}
 
 {% block main %}
@@ -57,6 +64,7 @@
         <th>Muss gezahlt werden</th>
         <th>Bezahlt</th>
         <th>Ausgehändigt</th>
+        <th>Löschen</th>
         <th>Bestellung</th>
         <th>Preis Gesamt</th>
       </tr>
