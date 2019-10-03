@@ -2,7 +2,7 @@ function requireLogin(req, res, next){
   if(req.isAuthenticated()){
     next();
   } else {
-    res.redirect(`${config.loginUrl}/?redirectBack=${config.login.url}/${req.originalUrl}`);
+    res.redirect(`${config.loginUrl}/?redirectBack=${config.shop.url}/${req.originalUrl}`);
   }
 }
 
