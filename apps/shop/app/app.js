@@ -39,6 +39,9 @@ module.exports = options => {
   app.use('/', express.static(__dirname + '/../static'));
 
   app.use('/', require('./shopRouter.js'));
+  app.use('/agb', (req, res) => {
+    res.render('pages/agb.njk');
+  });
 
   app.use('/admin', requireLogin, require('./adminRouter.js'));
 
