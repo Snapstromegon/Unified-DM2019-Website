@@ -112,6 +112,17 @@ module.exports = class IufTool {
         registrant.setUser(user);
         await registrant.save();
       }
+      const registrant = await Registrant.findOne({
+        where: { iufId: iufRegistrant.iufId }
+      });
+      if (!registrant.email || Registrant.userEmail) {
+        const registrantData = await this.getRegistrantDirectData(
+          iufRegistrant
+        );
+        registrant.email = registrantData.email;
+        registrant.userEmail = registrantData.userEmail;
+        await registrant.save();
+      }
     }
   }
 
