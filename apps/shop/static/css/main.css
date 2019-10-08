@@ -209,6 +209,16 @@ header #logo {
   height: var(--devider-bar-height);
 }
 
+@media print {
+  aside, footer, header, .devider {
+    display: none;
+  }
+
+  body {
+    display: block;
+  }
+}
+
 @media (min-width: 850px) {
   body {
     grid-template-columns: 20rem 1fr;
