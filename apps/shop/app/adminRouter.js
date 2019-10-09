@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { requireRole,requireOneOfRoles } = require('./utils.js');
+const { requireRole } = require('./utils.js');
 
 const {
   User,
@@ -23,7 +23,7 @@ router.use('/orders/delete/:id', requireRole('OrderManager'), async (req, res) =
   res.redirect('/admin/listAll');
 });
 
-router.get('/listAll', requireOneOfRoles('Payment', 'Handout'), async (req, res) => {
+router.get('/listAll', requireRole('Payment', 'Handout'), async (req, res) => {
   const users = await User.findAll({
     subQuery: false,
     include: [

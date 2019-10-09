@@ -1,23 +1,18 @@
 'use strict';
 
+const { Role } = require('../models/index.js');
+const roles = ['Admin', 'Handout', 'Payment', 'Summary'];
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert(
-      'Roles',
-      [
-        { name: 'Admin', createdAt: new Date(), updatedAt: new Date() },
-        { name: 'Handout', createdAt: new Date(), updatedAt: new Date() },
-        { name: 'Payment', createdAt: new Date(), updatedAt: new Date() }
-      ],
-      {}
-    );
+    for(const role of roles){
+      await Role.findOrCreate({where:{name: role}});
+    }
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Roles', [
-      { name: 'Admin' },
-      { name: 'Handout' },
-      { name: 'Payment' }
-    ]);
+    for(const role of roles){
+      await Role.destroy({where:{name: role}});
+    }
   }
 };

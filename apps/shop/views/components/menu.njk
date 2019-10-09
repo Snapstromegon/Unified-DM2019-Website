@@ -20,7 +20,7 @@
 
   {% if req.user %}
     <a href="https://login.freestyledm2019.de/logout?redirectBack=https://shop.freestyledm2019.de">Logout</a>
-    {% if req.user.hasRole('Payment') or req.user.hasRole('Handout') or req.user.hasRole('Admin') %}
+    {% if req.user.hasRole('Payment', 'Handout', 'Summary') %}
       <h2>Admin</h2>
       <a href="/admin/listAll" {{ 'class=active' if "Payment All" == currentPage }}>Bestellungen</a>
     {% endif %}
