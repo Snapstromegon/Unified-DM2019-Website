@@ -10,6 +10,10 @@ module.exports = class ShopItemOption extends Sequelize.Model {
     return this.ShopOrderItemSelections.reduce((prev, curr) => prev + curr.count, 0);
   }
 
+  get handedOutAmount() {
+    return this.ShopOrderItemSelections.reduce((prev, selection) => prev + (selection.ShopOrder.isHandedOut ? selection.count : 0), 0);
+  }
+
   /**
    * Init Model
    * @param {Sequelize} sequelize

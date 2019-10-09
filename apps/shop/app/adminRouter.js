@@ -73,7 +73,13 @@ router.get(
       include: [
         {
           model: ShopItemOption,
-          include: [{ model: ShopOrderItemSelection, required: true }],
+          include: [
+            {
+              model: ShopOrderItemSelection,
+              required: true,
+              include: [ShopOrder]
+            }
+          ],
           required: true
         }
       ]

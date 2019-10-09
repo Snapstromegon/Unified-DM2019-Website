@@ -49,7 +49,9 @@
       <tr>
         <th>Item</th>
         <th>Option</th>
-        <th>Ordered</th>
+        <th>Auszuhändigen</th>
+        <th>Ausgehändigt</th>
+        <th>Bestellt</th>
       </tr>
     </thead>
       {% for item in items %}
@@ -57,11 +59,15 @@
         <tr>
           <td rowspan="{{item.ShopItemOptions.length}}">{{item.label}}</td>
           <td>{{item.ShopItemOptions[0].label}}</td>
+          <td>{{item.ShopItemOptions[0].orderedAmount - item.ShopItemOptions[0].handedOutAmount}}</td>
+          <td>{{item.ShopItemOptions[0].handedOutAmount}}</td>
           <td>{{item.ShopItemOptions[0].orderedAmount}}</td>
         </tr>
         {% for itemOption in item.ShopItemOptions.slice(1) %}
         <tr>
           <td>{{itemOption.label}}</td>
+          <td>{{itemOption.orderedAmount - itemOption.handedOutAmount}}</td>
+          <td>{{itemOption.handedOutAmount}}</td>
           <td>{{itemOption.orderedAmount}}</td>
         </tr>
         {% endfor %}
