@@ -9,7 +9,7 @@ module.exports = class User extends Sequelize.Model {
   hasRole(...roleNames) {
     return (
       roleNames.find(roleName =>
-        this.Roles.find(role => role.name == roleName || 'Admin')
+        this.Roles.find(role => role.name == roleName || role.name == 'Admin')
       ) !== undefined
     );
   }
