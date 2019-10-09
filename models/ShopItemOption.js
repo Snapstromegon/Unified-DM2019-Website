@@ -6,6 +6,10 @@ module.exports = class ShopItemOption extends Sequelize.Model {
     return this.ShopItem.price + this.priceModificator;
   }
 
+  get orderedAmount() {
+    return this.ShopOrderItemSelections.reduce((prev, curr) => prev + curr.count, 0);
+  }
+
   /**
    * Init Model
    * @param {Sequelize} sequelize

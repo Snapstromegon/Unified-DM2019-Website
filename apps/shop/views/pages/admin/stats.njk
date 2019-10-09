@@ -6,6 +6,67 @@
 <div class="content">
   <h1>Stats</h1>
 
-  <h2>Orders: {{stats.orderCount}}</h2>
+  <h2>Gesamtübersicht</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Was</th>
+        <th>Unbezahlt</th>
+        <th>Bezahlt</th>
+        <th>Auszuhändigen</th>
+        <th>Ausgehändigt</th>
+        <th>Gesamt</th>
+        <th>Gesamtumsatz</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bestellungen</td>
+        <td>{{stats.orderCount - stats.paidOrderCount}}</td>
+        <td>{{stats.paidOrderCount}}</td>
+        <td>{{stats.orderCount - stats.handedOutOrderCount}}</td>
+        <td>{{stats.handedOutOrderCount}}</td>
+        <td>{{stats.orderCount}}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>T-Shirts</td>
+        <td>{{stats.shirtCount - stats.paidShirtCount}}</td>
+        <td>{{stats.paidShirtCount}}</td>
+        <td>{{stats.shirtCount - stats.handedOutShirtCount}}</td>
+        <td>{{stats.handedOutShirtCount}}</td>
+        <td>{{stats.shirtCount}}</td>
+        <td>{{stats.shirtCount * 24}}€</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>Shirtverteilung</h2>
+
+  <table class="beginn_table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Option</th>
+        <th>Ordered</th>
+      </tr>
+    </thead>
+      {% for item in items %}
+    <tbody class="table_devider">
+        <tr>
+          <td rowspan="{{item.ShopItemOptions.length}}">{{item.label}}</td>
+          <td>{{item.ShopItemOptions[0].label}}</td>
+          <td>{{item.ShopItemOptions[0].orderedAmount}}</td>
+        </tr>
+        {% for itemOption in item.ShopItemOptions.slice(1) %}
+        <tr>
+          <td>{{itemOption.label}}</td>
+          <td>{{itemOption.orderedAmount}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+      {% endfor %}
+  </table>
 </div>
 {% endblock %}
