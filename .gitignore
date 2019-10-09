@@ -1,3 +1,4 @@
 secrets.json
 .my.cnf
 node_modules
+.vscode
