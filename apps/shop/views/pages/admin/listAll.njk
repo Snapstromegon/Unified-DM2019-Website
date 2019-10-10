@@ -57,6 +57,7 @@
   <table class="beginn_table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>UserEmail</th>
@@ -72,6 +73,7 @@
   {%for user in users %}
     <tbody class="table_devider">
       <tr>
+            <td rowspan="{{user.orders.length}}">{{user.Registrant.iufId}}</td>
             <td rowspan="{{user.orders.length}}">{{user.name}}</td>
             <td rowspan="{{user.orders.length}}">{{user.Registrant.email}}</td>
             <td rowspan="{{user.orders.length}}">{{user.Registrant.userEmail}}</td>
