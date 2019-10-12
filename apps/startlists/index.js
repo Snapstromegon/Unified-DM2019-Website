@@ -2,7 +2,7 @@ const config = require('../../config/configLoader.js');
 
 const app = require('./app/app.js');
 const db = require('../../models/index.js');
-const IufTool = require('./iufTool/IufTool.js');
+const IufTool = require('./iufTool/iufTool.js');
 
 async function main() {
   console.log('🕐 Connecting to IUF Tool');
