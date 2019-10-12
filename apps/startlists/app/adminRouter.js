@@ -10,7 +10,7 @@ const {
   User
 } = require('../../../models/index.js');
 
-router.get('/listAll', async (req, res) => {
+router.get('/listAll',requireRole('Payment', 'Summary'), async (req, res) => {
   const acts = await EventStart.findAll({
     include: [
       { model: Registrant, include: [User] },
@@ -20,7 +20,7 @@ router.get('/listAll', async (req, res) => {
   res.render('pages/admin/listAll.njk', { req, acts });
 });
 
-router.get('/stats', async (req, res) => {
+router.get('/stats',requireRole('Payment', 'Summary'),async (req, res) => {
   const actNames = {
     set: await EventStart.count({
       where: { actName: { [sequelize.Op.or]: { [sequelize.Op.not]: null, [sequelize.Op.eq]: '' } } }
