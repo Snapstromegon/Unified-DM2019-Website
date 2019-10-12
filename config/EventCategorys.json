@@ -1,0 +1,162 @@
+[
+  {
+    "label": "Einzelkür",
+    "categorys": [
+      {
+        "label": "M Junior Expert",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "M Expert",
+        "actTime": 4,
+        "juryTime": 4
+      },
+      {
+        "label": "W U11",
+        "actTime": 2,
+        "juryTime": 2
+      },
+      {
+        "label": "W U12",
+        "actTime": 2,
+        "juryTime": 2
+      },
+      {
+        "label": "W U13",
+        "actTime": 2,
+        "juryTime": 2
+      },
+      {
+        "label": "W U15",
+        "actTime": 2,
+        "juryTime": 2
+      },
+      {
+        "label": "W U16",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "W U17",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "W U19",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "W U22",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "W Ü22",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "W Junior Expert",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "W Expert",
+        "actTime": 4,
+        "juryTime": 4
+      }
+    ]
+  },
+  {
+    "label": "Paarkür",
+    "categorys": [
+      {
+        "label": "U13",
+        "actTime": 2,
+        "juryTime": 2
+      },
+      {
+        "label": "U14",
+        "actTime": 2,
+        "juryTime": 2
+      },
+      {
+        "label": "U15",
+        "actTime": 2,
+        "juryTime": 2
+      },
+      {
+        "label": "U16",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "U17",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "U19",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "U21",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "U24",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "Ü24",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "Junior Expert",
+        "actTime": 3,
+        "juryTime": 3
+      },
+      {
+        "label": "Expert",
+        "actTime": 4,
+        "juryTime": 4
+      }
+    ]
+  },
+  {
+    "label": "Kleingruppe",
+    "categorys": [
+      {
+        "label": "Junior Expert",
+        "actTime": 4,
+        "juryTime": 4
+      },
+      {
+        "label": "Expert",
+        "actTime": 5,
+        "juryTime": 5
+      }
+    ]
+  },
+  {
+    "label": "Großgruppe",
+    "categorys": [
+      {
+        "label": "Junior Expert",
+        "actTime": 5,
+        "juryTime": 5
+      },
+      {
+        "label": "Expert",
+        "actTime": 5,
+        "juryTime": 5
+      }
+    ]
+  }
+]

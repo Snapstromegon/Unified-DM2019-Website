@@ -24,5 +24,6 @@ module.exports = class Registrant extends Sequelize.Model {
 
   static associate(models) {
     this.belongsTo(models.User);
+    this.belongsToMany(models.EventStart, { through: 'EventStartRegistrants' });
   }
 };
