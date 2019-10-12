@@ -12,6 +12,12 @@
         "port": 90
       }
     },
+    "startlists": {
+      "url": "https://startlists.freestyledm2019.de",
+      "express": {
+        "port": 91
+      }
+    },
     "db": {
       "credentialsFile": "./.my.cnf",
       "credentialsName": "client",
@@ -40,6 +46,12 @@
       "url": "https://shop.freestyledm2019.de",
       "express": {
         "port": 9091
+      }
+    },
+    "startlists": {
+      "url": "https://startlists.freestyledm2019.de",
+      "express": {
+        "port": 9092
       }
     },
     "db": {

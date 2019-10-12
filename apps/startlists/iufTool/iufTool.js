@@ -208,7 +208,7 @@ module.exports = class IufTool {
           { model: Registrant, where: { iufId: uploaderId }, required: true }
         ]
       });
-      if(start){
+      if(start && !start.actName){
         start.actName = description;
         await start.save();
       }

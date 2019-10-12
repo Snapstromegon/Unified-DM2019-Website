@@ -1,0 +1,49 @@
+{% set currentPage="Meine Küren" %}
+
+{% extends "../base.njk" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/shoppingCart.css">
+{%endblock%}
+
+{% block main %}
+<div class="content">
+  <h1>Deine Starts ({{ req.user.name }})</h1>
+  <h2>Kürnamen werden automatisch aus dem IUF Tool (aus den Musikuploads) übertragen</h2>
+  <p><strong>Nachträgliche Änderungen kannst du nur hier machen!</strong> Bitte nutze das Feld Beschreibung/Description beim Hochladen der Musik um den Kürnamen zu setzen.
+  Alternativ kannst du ihn auch hier setzen.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Kategorie</th>
+        <th>Kürname</th>
+        <th>Teilnehmer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for act in acts %}
+      <tr>
+        <td>{{act.EventCategory.Event.label}}</td>
+        <td>{{act.EventCategory.label}}</td>
+        <td>
+          <form action="/actName" method="post">
+            <input type="number" name="actId" hidden value="{{act.id}}">
+            <input type="text" name="actName" value="{{act.actName}}" placeholder="Kürname fehlt">
+            <input type="submit" value="Speichern">
+          </form>
+        </td>
+        <td>
+          <ul>
+            {% for registrant in act.Registrants %}
+              <li>#{{registrant.iufId}} {{registrant.User.name}}</li>
+            {%endfor%}
+          </ul>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

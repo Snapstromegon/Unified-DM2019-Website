@@ -1,0 +1,23 @@
+{% set navLinks = [
+  {
+    url: '/myActs',
+    name: 'Meine Küren'
+  }
+]%}
+
+<nav>
+  {% for navLink in navLinks %}
+    <a href="{{navLink.url}}" {{ 'class=active' if navLink.name == currentPage }}>{{navLink.name}}</a>
+  {% endfor %}
+
+  {% if req.user %}
+    <a href="https://login.freestyledm2019.de/logout?redirectBack=https://startlists.freestyledm2019.de">Logout</a>
+    {% if req.user.hasRole('Payment', 'Summary') %}
+      <h2>Admin</h2>
+      <a href="/admin/listAll" {{ 'class=active' if "Payment All" == currentPage }}>Alle Starts</a>
+      <a href="/admin/stats" {{ 'class=active' if "Stats" == currentPage }}>Stats</a>
+    {% endif %}
+  {%else%}
+    <a href="https://login.freestyledm2019.de/?redirectBack=https://startlists.freestyledm2019.de">Login</a>
+  {% endif %}
+</nav>

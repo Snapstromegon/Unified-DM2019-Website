@@ -1,10 +1,33 @@
 const express = require('express');
+const sequelize = require('sequelize');
 
 const router = express.Router();
+const {
+  Event,
+  EventCategory,
+  EventStart,
+  Registrant,
+  User
+} = require('../../../models/index.js');
 
-router.get('/', async (req, res) => {
-  res.render('pages/admin.njk', );
+router.get('/listAll', async (req, res) => {
+  const acts = await EventStart.findAll({
+    include: [
+      { model: Registrant, include: [User] },
+      { model: EventCategory, include: [Event] }
+    ]
+  });
+  res.render('pages/admin/listAll.njk', { req, acts });
 });
 
+router.get('/stats', async (req, res) => {
+  const actNames = {
+    set: await EventStart.count({
+      where: { actName: { [sequelize.Op.or]: { [sequelize.Op.not]: null, [sequelize.Op.eq]: '' } } }
+    }),
+    total: await EventStart.count()
+  };
+  res.render('pages/admin/stats.njk', { req, actNames });
+});
 
 module.exports = router;

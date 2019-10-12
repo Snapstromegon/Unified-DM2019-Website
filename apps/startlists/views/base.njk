@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop - Einrad Freestyle DM 2019 - SSV Nümbrecht</title>
+    <link rel="stylesheet" href="/css/main.css">
+    {% block css %}
+    {%endblock%}
+    <!-- <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link rel="shortcut icon" href="/res/img/circle_2.png" type="image/png">
+    <meta name="Theme-Color" content="#003049">
+    <meta name="Description" content="Deutsche Meisterschaft im Einrad Freestyle 2019">
+    <link rel="manifest" href="/manifest.json">
+  </head>
+  <body>
+    <header>
+      {%if largeHeader%}
+      <div class="content">
+        <img id="logo" src="/res/img/logo_light.svg" alt="Logo Deutsche Meisterschaft im Einrad Freestyle 2019" loading="lazy">
+        <div>
+          <h1>Deutsche Meisterschaft</h1>
+          <h1>Einrad Freestyle</h1>
+          <h2>SSV Nümbrecht</h2>
+          <h2>15. - 17. November 2019</h2>
+        </div>
+      </div>
+      {%endif%}
+    </header>
+
+    <aside>
+      {% include "./components/menu.njk" %}
+    </aside>
+    <main>
+    <div class="devider">
+        <div class="devider-blue"></div>
+        <div class="devider-red"></div>
+        <div class="devider-yellow"></div>
+      </div>
+      {% block main %}
+      {% endblock %}
+    </main>
+    <footer>
+      <a href="https://freestyledm2019.de/impressum.html">Impressum / Datenschutzerklärung</a>
+      <a href="/agb">AGB</a>
+    </footer>
+  
+
+</body></html>

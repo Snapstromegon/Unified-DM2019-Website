@@ -40,6 +40,10 @@ module.exports = options => {
 
   app.use('/', require('./actNameRouter.js'));
 
+  app.get('/', (req, res) => {
+    res.redirect('/myActs');
+  })
+
   app.use('/admin', requireLogin, require('./adminRouter.js'));
 
   app.listen(options.port, err => {
