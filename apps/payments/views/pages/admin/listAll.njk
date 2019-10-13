@@ -1,0 +1,47 @@
+{% set currentPage="Alle Zahlungen" %}
+
+{% extends "../../base.njk" %}
+
+{% block main %}
+<div class="content">
+  <h1>Deine Zahlungen ({{ req.user.name }})</h1>
+  <h2>Zahlungen werden erst verzögert manuell eingepflegt!</h2>
+  <table class="beginn_table">
+    <thead>
+      <tr>
+        <th>IUF-Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Bestellung</th>
+        <th>Zu Zahlen</th>
+        <th>Offen</th>
+        <th>Bezahlt</th>
+        <th>Fertig?</th>
+      </tr>
+    </thead>
+  {%for data in registrantsWithPayments%}
+    <tbody class="table_devider">
+    <tr>
+      <td rowspan="{{data.payments.length}}">{{data.registrant.iufId or data.originalId}}</td>
+      <td rowspan="{{data.payments.length}}">{{data.registrant.User.name}}</td>
+      <td rowspan="{{data.payments.length}}">{{data.registrant.email}}</td>
+      <td>{{data.payments[0].name}}</td>
+      <td>{{data.payments[0].ordered}}€</td>
+      <td>{{data.payments[0].ordered - data.payments[0].payed}}€</td>
+      <td>{{data.payments[0].payed}}€</td>
+      <td>{{"✔️" if data.payments[0].ordered == data.payments[0].payed else "❌"}}</td>
+    </tr>
+    {% for payItem in data.payments.slice(1) %}
+      <tr>
+        <td>{{payItem.name}}</td>
+        <td>{{payItem.ordered}}€</td>
+        <td>{{payItem.ordered - payItem.payed}}€</td>
+        <td>{{payItem.payed}}€</td>
+        <td>{{"✔️" if payItem.ordered == payItem.payed else "❌"}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  {%endfor %}
+  </table>
+</div>
+{% endblock %}

@@ -19,6 +19,12 @@
       "request": "launch",
       "name": "Launch Startlists",
       "program": "${workspaceFolder}/apps/startlists/index.js"
+    },{
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Payments",
+      "cwd": "${workspaceFolder}/apps/payments",
+      "program": "${workspaceFolder}/apps/payments/index.js"
     }
   ]
 }

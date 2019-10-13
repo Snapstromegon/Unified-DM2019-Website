@@ -1,0 +1,32 @@
+{% set currentPage="Meine Zahlungen" %}
+
+{% extends "../base.njk" %}
+
+{% block main %}
+<div class="content">
+  <h1>Deine Zahlungen ({{ req.user.name }})</h1>
+  <h2>Zahlungen werden erst verzögert manuell eingepflegt!</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Bestellung</th>
+        <th>Zu Zahlen</th>
+        <th>Offen</th>
+        <th>Bezahlt</th>
+        <th>Fertig?</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payItem in payments %}
+        <tr>
+          <td>{{payItem.name}}</td>
+          <td>{{payItem.ordered}}€</td>
+          <td>{{payItem.ordered - payItem.payed}}€</td>
+          <td>{{payItem.payed}}€</td>
+          <td>{{"✔️" if payItem.ordered == payItem.payed else "❌"}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{
+  "name": "payments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-session-sequelize": "^6.0.0",
+    "csv-parse": "^4.6.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "nunjucks": "^3.2.0",
+    "passport": "^0.4.0"
+  }
+}

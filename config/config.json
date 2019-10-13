@@ -18,6 +18,13 @@
         "port": 91
       }
     },
+    "payments": {
+      "url": "https://payments.freestyledm2019.de",
+      "express": {
+        "port": 92
+      },
+      "paymentDataLocation": "./DM-payments-UTF8.csv"
+    },
     "db": {
       "credentialsFile": "./.my.cnf",
       "credentialsName": "client",
@@ -53,6 +60,13 @@
       "express": {
         "port": 9092
       }
+    },
+    "payments": {
+      "url": "https://payments.freestyledm2019.de",
+      "express": {
+        "port": 9093
+      },
+      "paymentDataLocation": "~/DM-payments-UTF8.csv"
     },
     "db": {
       "credentialsFile": "/home/odm2019/.my.cnf",
