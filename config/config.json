@@ -66,7 +66,7 @@
       "express": {
         "port": 9093
       },
-      "paymentDataLocation": "~/DM-payments-UTF8.csv"
+      "paymentDataLocation": "/home/odm2019/DM-payments-UTF8.csv"
     },
     "db": {
       "credentialsFile": "/home/odm2019/.my.cnf",
