@@ -1,5 +1,6 @@
 const csvParser = require('csv-parse');
 const fs = require('fs');
+const config = require('../../config/configLoader.js');
 
 const POs = {
   EK: 'Einzelkür',
@@ -50,5 +51,5 @@ async function keepUpToDate(file) {
     }
   });
 }
-keepUpToDate('./DM-payments-UTF8.csv');
+keepUpToDate(config.payments.paymentDataLocation);
 module.exports = {data:undefined};
