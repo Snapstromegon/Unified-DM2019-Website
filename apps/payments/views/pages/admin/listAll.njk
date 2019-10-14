@@ -22,7 +22,7 @@
   {%for data in registrantsWithPayments%}
     <tbody class="table_devider">
     <tr>
-      <td rowspan="{{data.payments.length}}">{{data.registrant.iufId or data.originalId}}</td>
+      <td rowspan="{{data.payments.length}}">{{data.registrant.iufId or "?" + data.originalId}}</td>
       <td rowspan="{{data.payments.length}}">{{data.registrant.User.name}}</td>
       <td rowspan="{{data.payments.length}}">{{data.registrant.email}}</td>
       <td>{{data.payments[0].name}}</td>
