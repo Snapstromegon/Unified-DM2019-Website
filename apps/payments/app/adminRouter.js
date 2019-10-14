@@ -14,7 +14,7 @@ router.get('/listAll', requireRole('Payment'), async (req, res) => {
     if (paymentData.data[registrantId].length) {
       registrantsWithPayments.push({
         payments: paymentData.data[registrantId],
-        registrant: registrants.find(r => r.iufId === registrantId),
+        registrant: registrants.find(r => r.iufId == registrantId),
         originalId: registrantId
       });
     }
