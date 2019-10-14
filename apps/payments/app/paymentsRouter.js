@@ -6,7 +6,7 @@ const router = express.Router();
 const paymentData = require('../paymentData.js');
 
 router.all('/myPayments', requireLogin, async (req, res) => {
-  const userRegistrantId = ((await req.user.getRegistrant()) || {}).id;
+  const userRegistrantId = ((await req.user.getRegistrant()) || {}).iufId;
   const payments = paymentData.data[userRegistrantId];
   res.render('pages/myPayments.njk', {
     req,
