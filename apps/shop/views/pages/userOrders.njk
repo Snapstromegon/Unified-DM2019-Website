@@ -13,6 +13,7 @@
   {%for order in orders %}
   {% set items=order.items%}
   <h2>{{order.paymentId}}</h2>
+  <span>Bezahlt: {{"✔️" if order.isPayed else "❌"}} - Ausgehändigt: {{"✔️" if order.isHandedOut else "❌"}}</span>
   <table class="beginn_table">
     <thead>
       <tr>
