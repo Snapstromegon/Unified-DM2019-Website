@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 const LocalStrategy = require('passport-local').Strategy;
-const {User, Role} = require('../../../models/index.js');
+const {User, Role, Registrant} = require('../../../models/index.js');
 
 passport.use(
   new LocalStrategy(
@@ -11,9 +11,15 @@ passport.use(
     },
     async (name, password, cb) => {
       try {
-        const user = await User.findOne({
+        let user = await User.findOne({
           where: { name: name.split(/\d+/).pop().trim() }
         });
+        if(!user){
+          user = (await Registrant.findOne({
+            where: {iufId: name.match(/\d+/)[0]},
+            include: [User]
+          })).User
+        }
         if (user && (await user.verifyPassword(password.trim()))) {
           cb(null, user);
         } else {
