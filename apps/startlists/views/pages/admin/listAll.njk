@@ -8,6 +8,7 @@
   <table>
     <thead>
       <tr>
+        <th>orderPosition</th>
         <th>Event</th>
         <th>Kategorie</th>
         <th>Kürname</th>
@@ -17,6 +18,7 @@
     <tbody>
       {% for act in acts %}
       <tr>
+        <td>{{act.orderPosition or "null"}}</td>
         <td>{{act.EventCategory.Event.label}}</td>
         <td>{{act.EventCategory.label}}</td>
         <td>
