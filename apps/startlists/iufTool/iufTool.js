@@ -147,6 +147,7 @@ module.exports = class IufTool {
           }
         }
         highestMatch.match.setRegistrants(registrants);
+        highestMatch.match.orderPosition = startEntry.order;
         await highestMatch.match.save();
       }
     }
