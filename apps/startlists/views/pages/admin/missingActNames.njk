@@ -1,0 +1,54 @@
+{% set currentPage="Acts All" %}
+
+{% extends "../../base.njk" %}
+
+{% block main %}
+<div class="content">
+  <h1>Starts ohne Kürnamen ({{acts.length}})</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>actId</th>
+        <th>orderPosition</th>
+        <th>Event</th>
+        <th>Kategorie</th>
+        <th>Kürname</th>
+        <th>Teilnehmer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for act in acts %}
+      <tr>
+        <td>{{act.id}}</td>
+        <td>{{act.orderPosition or "null"}}</td>
+        <td>{{act.EventCategory.Event.label}}</td>
+        <td>{{act.EventCategory.label}}</td>
+        <td>
+          <form action="/actName" method="post">
+            <input type="number" name="actId" hidden value="{{act.id}}">
+            <input type="text" name="actName" value="{{act.actName}}" placeholder="Kürname fehlt">
+            <input type="submit" value="Speichern">
+          </form>
+        </td>
+        <td>
+          <ul>
+            {% for registrant in act.Registrants %}
+              <li>#{{registrant.iufId}} {{registrant.User.name}}</li>
+            {%endfor%}
+          </ul>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  <h2>All Emailadresses</h2>
+  <ul>
+    {%for act in acts%}
+      {% for registrant in act.Registrants %}
+        <li>{{registrant.email}}</li>
+        <li>{{registrant.userEmail}}</li>
+      {%endfor%}
+    {%endfor%}
+  </ul>
+</div>
+{% endblock %}
