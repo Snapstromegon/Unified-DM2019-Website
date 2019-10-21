@@ -1,5 +1,7 @@
 const express = require('express');
 const { requireLogin } = require('./utils.js');
+const sequelize = require('sequelize');
+
 
 const router = express.Router();
 const {
