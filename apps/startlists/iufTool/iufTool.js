@@ -4,7 +4,9 @@ const Registrant = require('../../../models/Registrant.js');
 const Event = require('../../../models/Event.js');
 const EventCategory = require('../../../models/EventCategory.js');
 const EventStart = require('../../../models/EventStart.js');
+const EventStartMusic = require('../../../models/EventStartMusic.js');
 const sequelize = require('sequelize');
+const path = require('path');
 
 const competitionNames = {
   Einzel: 'Einzelkür',
@@ -196,6 +198,9 @@ module.exports = class IufTool {
       const eventName = columns[0].querySelector('a').innerHTML.trim();
       const uploaderId = columns[1].innerHTML.trim();
       const description = columns[4].innerHTML.trim();
+      const originalFilename = columns[5].innerHTML.trim();
+      const uploaded = new Date(columns[6].innerHTML.trim());
+      const downloadUrl = columns[7].querySelector('a').href;
 
       const start = await EventStart.findOne({
         include: [
@@ -206,13 +211,66 @@ module.exports = class IufTool {
               { model: Event, where: { label: eventName }, required: true }
             ]
           },
-          { model: Registrant, where: { iufId: uploaderId }, required: true }
+          { model: Registrant, where: { iufId: uploaderId }, required: true },
+          { model: EventStartMusic, order: [['uploaded', 'DESC']] }
         ]
       });
-      if(start && !start.actName){
+      if (start && !start.actName) {
         start.actName = description;
         await start.save();
       }
+      await this.updateMusic(
+        start,
+        uploaderId,
+        originalFilename,
+        uploaded,
+        downloadUrl
+      ).catch(e => {
+        console.error(e);
+      });
+    }
+  }
+
+  /**
+   *
+   * @param {EventStart} start
+   * @param {Number} uploaderId
+   * @param {string} originalFilename
+   * @param {Date} uploaded
+   * @param {string} downloadUrl
+   */
+  async updateMusic(
+    start,
+    uploaderId,
+    originalFilename,
+    uploaded,
+    downloadUrl
+  ) {
+    if (
+      start &&
+      (!start.EventStartMusics.length ||
+        start.EventStartMusics.find(
+          music => music.uploaded.getTime >= uploaded.getTime()
+        ))
+    ) {
+      const localPath = path.join(
+        config.musicDir,
+        start.EventCategory.Event.label,
+        start.EventCategory.label,
+        `${uploaderId}-${uploaded.getTime()}-${originalFilename}`
+      );
+      console.log('Downloading: ', originalFilename);
+      await this.session.download(downloadUrl, localPath);
+      const music = new EventStartMusic({
+        uploaded: uploaded,
+        originalFilename: originalFilename,
+        filepath: localPath
+      });
+      await music.save();
+      music.setRegistrant(uploaderId);
+      await music.save();
+      music.setEventStart(start);
+      await music.save();
     }
   }
 

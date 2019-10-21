@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      originalFilename: {
+      uploaded: {
         allowNull: false,
         type: Sequelize.DATE
       },

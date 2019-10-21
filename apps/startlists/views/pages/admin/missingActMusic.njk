@@ -1,10 +1,10 @@
-{% set currentPage="Acts All" %}
+{% set currentPage="missingActMusic" %}
 
 {% extends "../../base.njk" %}
 
 {% block main %}
 <div class="content">
-  <h1>Alle Starts</h1>
+  <h1>Starts ohne Musik ({{acts.length}})</h1>
   <table>
     <thead>
       <tr>
@@ -43,5 +43,14 @@
       {%endfor%}
     </tbody>
   </table>
+  <h2>All Emailadresses</h2>
+  <ul>
+    {%for act in acts%}
+      {% for registrant in act.Registrants %}
+        <li>{{registrant.email}},</li>
+        <li>{{registrant.userEmail}},</li>
+      {%endfor%}
+    {%endfor%}
+  </ul>
 </div>
 {% endblock %}

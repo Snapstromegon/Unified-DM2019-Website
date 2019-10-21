@@ -1,4 +1,4 @@
-{% set currentPage="Acts All" %}
+{% set currentPage="missingActNames" %}
 
 {% extends "../../base.njk" %}
 
@@ -13,6 +13,7 @@
         <th>Event</th>
         <th>Kategorie</th>
         <th>Kürname</th>
+        <th>Musik da?</th>
         <th>Teilnehmer</th>
       </tr>
     </thead>
@@ -30,6 +31,7 @@
             <input type="submit" value="Speichern">
           </form>
         </td>
+        <td>{{"✔️" if act.EventStartMusics.length else "❌"}}</td>
         <td>
           <ul>
             {% for registrant in act.Registrants %}
@@ -45,8 +47,8 @@
   <ul>
     {%for act in acts%}
       {% for registrant in act.Registrants %}
-        <li>{{registrant.email}}</li>
-        <li>{{registrant.userEmail}}</li>
+        <li>{{registrant.email}},</li>
+        <li>{{registrant.userEmail}},</li>
       {%endfor%}
     {%endfor%}
   </ul>

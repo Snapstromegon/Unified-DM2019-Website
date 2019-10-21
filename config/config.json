@@ -40,7 +40,8 @@
     },
     "loginUrl": "http://localhost:89",
     "loginDomain": "localhost",
-    "secretConfig": "./secrets.json"
+    "secretConfig": "./secrets.json",
+    "musicDir": "./music/"
   },
   "production": {
     "login": {
@@ -83,6 +84,7 @@
     },
     "loginUrl": "https://login.freestyledm2019.de",
     "loginDomain": "freestyledm2019.de",
-    "secretConfig": "/home/odm2019/secrets.json"
+    "secretConfig": "/home/odm2019/secrets.json",
+    "musicDir": "~/music/"
   }
 }

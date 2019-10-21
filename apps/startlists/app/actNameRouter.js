@@ -6,6 +6,7 @@ const {
   Event,
   EventCategory,
   EventStart,
+  EventStartMusic,
   Registrant,
   User
 } = require('../../../models/index.js');
@@ -15,7 +16,8 @@ router.all('/myActs', requireLogin, async (req, res) => {
   const starts = await EventStart.findAll({
     include: [
       { model: Registrant, include: [User] },
-      { model: EventCategory, include: [Event] }
+      { model: EventCategory, include: [Event] },
+      EventStartMusic
     ]
   });
   const userRegistrantId = ((await req.user.getRegistrant()) || {}).id;

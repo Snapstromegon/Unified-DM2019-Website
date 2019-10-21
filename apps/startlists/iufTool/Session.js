@@ -1,5 +1,7 @@
 const rpn = require('request-promise-native');
 const { JSDOM } = require('jsdom');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = class Session {
   /**
@@ -60,5 +62,15 @@ module.exports = class Session {
       },
       ...options.slice(1)
     );
+  }
+
+  async download(url, destPath) {
+    const body = await this.get({
+      url: `${this.url}${url}`,
+      followAllRedirects: true,
+      encoding: null
+    });
+    await fs.promises.mkdir(path.dirname(destPath), { recursive: true });
+    await fs.promises.writeFile(destPath, body);
   }
 };
