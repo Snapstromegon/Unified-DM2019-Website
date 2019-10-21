@@ -44,6 +44,7 @@ router.get(
   requireRole('Payment', 'Summary'),
   async (req, res) => {
     const acts = (await EventStart.findAll({
+      where: { orderPosition: { [sequelize.Op.not]: null } },
       include: [
         { model: Registrant, include: [User] },
         { model: EventCategory, include: [Event] },
@@ -58,18 +59,24 @@ router.get('/stats', requireRole('Payment', 'Summary'), async (req, res) => {
   const actNames = {
     set: await EventStart.count({
       where: {
+        orderPosition: { [sequelize.Op.not]: null },
         actName: {
           [sequelize.Op.or]: { [sequelize.Op.not]: null, [sequelize.Op.eq]: '' }
         }
       }
     }),
-    total: await EventStart.count()
+    total: await EventStart.count({
+      where: { orderPosition: { [sequelize.Op.not]: null } }
+    })
   };
   const actMusic = {
     set: await EventStart.count({
+      where: { orderPosition: { [sequelize.Op.not]: null } },
       include: [{ model: EventStartMusic, required: true }]
     }),
-    total: await EventStart.count()
+    total: await EventStart.count({
+      where: { orderPosition: { [sequelize.Op.not]: null } }
+    })
   };
   res.render('pages/admin/stats.njk', { req, actNames, actMusic });
 });

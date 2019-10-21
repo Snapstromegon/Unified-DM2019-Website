@@ -14,6 +14,7 @@ const {
 router.all('/myActs', requireLogin, async (req, res) => {
   // const orders = await ShopOrder.findAllIncludingItems({where: {UserId: req.user.id}});
   const starts = await EventStart.findAll({
+    where:{orderPosition: {[sequelize.Op.not]: null}},
     include: [
       { model: Registrant, include: [User] },
       { model: EventCategory, include: [Event] },

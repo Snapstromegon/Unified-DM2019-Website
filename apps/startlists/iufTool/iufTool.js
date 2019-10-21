@@ -97,6 +97,8 @@ module.exports = class IufTool {
     const document = new JSDOM(response).window.document;
     const tbody = document.querySelector('tbody');
 
+    const startEntrys = [];
+
     for (const tr of tbody.querySelectorAll('tr')) {
       const columns = tr.querySelectorAll('td');
       const startEntry = {
@@ -106,16 +108,23 @@ module.exports = class IufTool {
           .map(id => parseInt(id.trim()))
       };
 
-      const starts = await EventStart.findAll({
+      startEntrys.push(startEntry);
+    }
+    for (const startEntry of startEntrys) {
+      const dbStarts = await EventStart.findAll({
         where: { EventCategoryId: eventCategory.id },
         include: [
           {
             model: Registrant,
-            required: true,
-            where: { iufId: startEntry.registrants }
-          }
+            required: true
+          },
+          { model: EventCategory, include: [Event] }
         ]
       });
+
+      const starts = dbStarts.filter(start =>
+        start.Registrants.find(r => startEntry.registrants.includes(r.iufId))
+      );
 
       const registrants = await Registrant.findAll({
         where: { iufId: startEntry.registrants }
@@ -148,9 +157,46 @@ module.exports = class IufTool {
             highestMatch.match = start;
           }
         }
+        const unmatchedStarts = starts.filter(
+          start => start != highestMatch.match
+        );
+        // for (const unmatched of unmatchedStarts) {
+        //   console.log(unmatched);
+        // }
         highestMatch.match.setRegistrants(registrants);
         highestMatch.match.orderPosition = startEntry.order;
         await highestMatch.match.save();
+      }
+    }
+
+    for (const start of await EventStart.findAll({
+      where: {
+        EventCategoryId: eventCategory.id,
+        orderPosition: { [sequelize.Op.not]: null }
+      },
+      include: [
+        { model: Registrant },
+        { model: EventCategory, include: [Event] }
+      ]
+    })) {
+      let found = false;
+      for (const startEntry of startEntrys) {
+        const registrants = new Set(startEntry.registrants);
+        let hasMissing = false;
+        for (const registrant of start.Registrants) {
+          if (registrants.has(registrant.iufId)) {
+            registrants.delete(registrant.iufId);
+          } else {
+            hasMissing = true;
+          }
+        }
+        if (!hasMissing && !registrants.length) {
+          found = true;
+        }
+      }
+      if (!found) {
+        start.orderPosition = null;
+        await start.save();
       }
     }
   }
