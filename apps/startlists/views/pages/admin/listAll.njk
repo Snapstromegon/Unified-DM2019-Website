@@ -33,11 +33,19 @@
         </td>
         <td>{{"✔️" if act.EventStartMusics.length else "❌"}}</td>
         <td>
-          <ul>
+          <table>
+          <tbody>
             {% for registrant in act.Registrants %}
-              <li>#{{registrant.iufId}} {{registrant.User.name}}</li>
+              <tr>
+                <td>#{{registrant.iufId}}</td>
+                <td>{{registrant.User.name}}</td>
+                <td>{{registrant.club}}</td>
+                <td>{{registrant.email}}</td>
+                <td>{{registrant.userEmail}}</td>
+              </tr>
             {%endfor%}
-          </ul>
+          </tbody>
+          </table>
         </td>
       </tr>
       {%endfor%}
