@@ -85,6 +85,6 @@
     "loginUrl": "https://login.freestyledm2019.de",
     "loginDomain": "freestyledm2019.de",
     "secretConfig": "/home/odm2019/secrets.json",
-    "musicDir": "~/music/"
+    "musicDir": "/home/odm2019/music/"
   }
 }
