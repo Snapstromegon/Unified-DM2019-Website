@@ -28,7 +28,7 @@ router.get(
   requireRole('Payment', 'Summary'),
   async (req, res) => {
     const acts = await EventStart.findAll({
-      where: { actName: null },
+      where: { actName: null,orderPosition: { [sequelize.Op.not]: null } },
       include: [
         { model: Registrant, include: [User] },
         { model: EventCategory, include: [Event] },
