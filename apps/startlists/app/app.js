@@ -37,6 +37,7 @@ module.exports = options => {
   app.use(passport.session());
 
   app.use('/', express.static(__dirname + '/../static'));
+  app.use('/music', express.static(config.musicDir));
 
   app.use('/', require('./actNameRouter.js'));
 
@@ -44,6 +45,7 @@ module.exports = options => {
     res.redirect('/myActs');
   })
 
+  app.use('/startlist', requireLogin, require('./startlistRouter.js'));
   app.use('/admin', requireLogin, require('./adminRouter.js'));
 
   app.listen(options.port, err => {

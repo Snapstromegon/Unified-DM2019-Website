@@ -1,0 +1,35 @@
+{% set currentPage="Startliste" %}
+
+{% extends "../../base.njk" %}
+
+{% block main %}
+<div class="content">
+  <h1>Startliste</h1>
+  {%for event in events%}
+    <h2>{{event.label}}</h2>
+    {%for category in event.EventCategories%}
+      <h3>{{category.label}}</h3>
+      <table>
+        <tbody>
+          {%for start in category.EventStarts%}
+            <tr>
+              <td>{{start.orderPosition}}</td>
+              <td>{{start.actName}}</td>
+              <td>
+                <ul>
+                  {%for registrant in start.Registrants%}
+                    <li>{{registrant.User.name}}</li>
+                  {%endfor%}
+                </ul>
+              </td>
+              {# <td>
+                <a href="{{start.EventStartMusics[0].filepath}}">{{start.EventStartMusics[0].originalFilename}}</a>
+              </td> #}
+            </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    {%endfor%}
+  {%endfor%}
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+[
+  {
+    "event": "Einzelkür",
+    "category": "U11",
+    "start": "2019-11-15T13:00:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "U12",
+    "start": "2019-11-15T13:22:00.000+01:00",
+    "warmupTime": 2
+  },
+  {
+    "event": "Einzelkür",
+    "category": "U13",
+    "start": "2019-11-15T13:52:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "U15",
+    "start": "2019-11-15T14:32:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "U16",
+    "start": "2019-11-15T15:32:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "U17",
+    "start": "2019-11-15T16:42:00.000+01:00"
+  },
+  {
+    "type": "break",
+    "duration": 30,
+    "label": "Siegerehrung bis U16",
+    "start": "2019-11-15T17:24:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "U19",
+    "start": "2019-11-15T18:04:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "U22",
+    "start": "2019-11-15T19:14:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "Ü22",
+    "start": "2019-11-15T20:12:00.000+01:00"
+  }
+]
