@@ -16,6 +16,11 @@ const {
 
 router.get('/', requireRole('Payment', 'Summary'), async (req, res) => {
   const events = await Event.findAll({
+    order: [
+      ['id', 'ASC'],
+      [EventCategory, 'id', 'ASC'],
+      [EventCategory, EventStart, 'orderPosition', 'ASC']
+    ],
     include: [
       {
         model: EventCategory,
@@ -27,7 +32,6 @@ router.get('/', requireRole('Payment', 'Summary'), async (req, res) => {
                 [sequelize.Op.not]: null
               }
             },
-            order: [['orderPosition', 'ASC']],
             include: [
               EventStartMusic,
               {
