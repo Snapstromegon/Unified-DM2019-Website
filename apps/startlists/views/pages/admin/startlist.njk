@@ -22,6 +22,13 @@
                   {%endfor%}
                 </ul>
               </td>
+              <td>
+                <ul>
+                  {%for registrant in start.Registrants%}
+                    <li>{{registrant.club}}</li>
+                  {%endfor%}
+                </ul>
+              </td>
               {# <td>
                 <a href="{{start.EventStartMusics[0].filepath}}">{{start.EventStartMusics[0].originalFilename}}</a>
               </td> #}
