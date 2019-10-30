@@ -8,30 +8,31 @@
 {% block main %}
 
 <div class="content">
+<h2>Der Shop ist seit dem 30.10.2019 geschlossen! Du kannst keine weiteren Bestellungen aufgeben!</h2>
   <div class="orderItemDetails">
     
     <h1>{{shopItem.label}}</h1>
     <h2 class="price">{{shopItem.price}}€</h2>
     <p class="description">{{shopItem.description}}</p>
-    <form action="/shoppingCart" method="post">
+    {# <form action="/shoppingCart" method="post"> #}
   <table>
     <thead>
       <tr>
         <th>Größe</th>
-        <th>Anzahl</th>
+        {# <th>Anzahl</th> #}
       </tr>
     </thead>
     <tbody>
     {% for option in shopItem.ShopItemOptions %}
       <tr>
         <td class="right">{{option.label}}</td>
-        <td><input type="number" name='selectOption[#{{option.id}}]' id="" value="{{counts[option.id] or 0}}" min=0></td>
+        {# <td><input type="number" name='selectOption[#{{option.id}}]' id="" value="{{counts[option.id] or 0}}" min=0></td> #}
       </tr>
     {%endfor%}
     </tbody>
   </table>
-  <input type="submit" value="Im Warenkorb speichern">
-  </form>
+  {# <input type="submit" value="Im Warenkorb speichern"> #}
+  {# </form> #}
   </div>
   
 </div>

@@ -1,5 +1,5 @@
 const express = require('express');
-const { requireLogin } = require('./utils.js');
+const { requireLogin, requireRole } = require('./utils.js');
 
 const router = express.Router();
 const {

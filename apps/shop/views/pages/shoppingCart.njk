@@ -11,7 +11,7 @@
   <h1>Dein Warenkorb</h1>
   {% set items=order.items%}
   {%if items.length > 0 %}
-    <form action="/shoppingCart" method="post">
+    {# <form action="/shoppingCart" method="post"> #}
   <table class="beginn_table">
     <thead>
       <tr>
@@ -30,7 +30,8 @@
           <td class="right">{{item.ShopItemOptions[0].label}}</td>
           <td class="right">{{optionTotalPrice}} €</td>
           <td class="right noPadding">
-            <input type="number" min=0 oninput="valueChanged()" value="{{item.ShopItemOptions[0].ShopOrderItemSelections[0].count}}" name='selectOption[#{{item.ShopItemOptions[0].id}}]'>
+          {{item.ShopItemOptions[0].ShopOrderItemSelections[0].count}}
+            {# <input type="number" min=0 oninput="valueChanged()" value="{{item.ShopItemOptions[0].ShopOrderItemSelections[0].count}}" name='selectOption[#{{item.ShopItemOptions[0].id}}]'> #}
           </td>
           <td class="right">{{optionTotalPrice * item.ShopItemOptions[0].ShopOrderItemSelections[0].count}} €</td>
         </tr>
@@ -40,7 +41,8 @@
             <td class="right">{{option.label}}</td>
             <td class="right">{{optionTotalPrice}} €</td>
             <td class="right noPadding">
-              <input type="number" min=0 oninput="valueChanged()" value="{{option.ShopOrderItemSelections[0].count}}" name='selectOption[#{{option.id}}]'>
+            {{option.ShopOrderItemSelections[0].count}}
+              {# <input type="number" min=0 oninput="valueChanged()" value="{{option.ShopOrderItemSelections[0].count}}" name='selectOption[#{{option.id}}]'> #}
             </td>
             <td class="right">{{optionTotalPrice * option.ShopOrderItemSelections[0].count}} €</td>
           </tr>
@@ -63,12 +65,12 @@
       document.querySelector('#commitOrder').hidden=true;
     }
   </script>
-  <div class="flexFullWidth">
+  {# <div class="flexFullWidth">
     <a href="/">Weiter einkaufen</a>
     <input type="submit" value="Änderungen Speichern" id="saveChanges" hidden>
     <a href="/commitOrder" id="commitOrder">Zahlungspflichtig Bestellen</a>
-  </div>
-  </form>
+  </div> #}
+  {# </form> #}
   {% else %}
     <p>Du hast noch nichts im Warenkorb.</p>
     {%endif%}
