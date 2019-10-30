@@ -41,11 +41,12 @@ router.post('/actName', requireLogin, async (req, res) => {
       include: [{ model: Registrant }]
     });
   } else {
-    start = await EventStart.findByPk(parseInt(req.body.actId), {
-      include: [
-        { model: Registrant, reuired: true, where: { id: userRegistrantId } }
-      ]
-    });
+    // start = await EventStart.findByPk(parseInt(req.body.actId), {
+    //   include: [
+    //     { model: Registrant, reuired: true, where: { id: userRegistrantId } }
+    //   ]
+    // });
+    return res.redirect('/');
   }
   if (start) {
     start.actName = req.body.actName;

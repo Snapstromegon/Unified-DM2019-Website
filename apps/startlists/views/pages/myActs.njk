@@ -25,11 +25,7 @@
         <td>{{act.EventCategory.Event.label}}</td>
         <td>{{act.EventCategory.label}}</td>
         <td>
-          <form action="/actName" method="post">
-            <input type="number" name="actId" hidden value="{{act.id}}">
-            <input type="text" name="actName" value="{{act.actName}}" placeholder="Kürname fehlt">
-            <input type="submit" value="Speichern">
-          </form>
+          {{act.actName}}
         </td>
         <td>{{"✔️" if act.EventStartMusics.length else "❌"}}</td>
         <td>
