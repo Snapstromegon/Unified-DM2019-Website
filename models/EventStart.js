@@ -14,6 +14,11 @@ module.exports = class EventStart extends Sequelize.Model {
           allowNull: true,
           defaultValue: null
         },
+        started: {
+          type: DataTypes.DATE,
+          allowNull: true,
+          defaultValue: true
+        },
         orderPosition: DataTypes.NUMBER
       },
       {
