@@ -1,0 +1,20 @@
+{% set currentPage="next start" %}
+
+{% extends "../../base.njk" %}
+
+{% block main %}
+<div class="content">
+  <h1>Nächster Start</h1>
+              <p>{{nextStart.data.startId}}</p>
+              <p>{{nextStart.data.event}}</p>
+              <p>{{nextStart.data.category}}</p>
+              <p>{{nextStart.name}}</p>
+              <p>
+                <ul>
+                  {%for starter in nextStart.data.starters%}
+                    <li>{{starter.User.name}}</li>
+                  {%endfor%}
+                </ul>
+              </p>
+</div>
+{% endblock %}

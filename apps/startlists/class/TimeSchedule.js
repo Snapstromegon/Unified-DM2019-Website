@@ -131,9 +131,15 @@ module.exports = class TimeSchedule {
       })
     );
     if (Date.now() > results[0].expectedStartTime.getTime()) {
-      results[0].started = results[0].expectedStartTime;
+      results[0].startTime = results[0].expectedStartTime;
+      results[0].expectedStartTime = results[0].startTime;
     }
-
+    if (eventWithCategory.EventCategories[0].EventStarts[0].started) {
+      results[0].startTime = new Date(eventWithCategory.EventCategories[0].EventStarts[0].started);
+      results[0].startTime.setMinutes(results[0].startTime.getMinutes() - scheduleItem.warmupTime);
+      results[0].expectedStartTime = results[0].startTime;
+    }
+    
     let startTimeOffset = 0;
     for (const start of eventWithCategory.EventCategories[0].EventStarts) {
       const startStartTime = new Date(scheduleItem.start);
@@ -142,13 +148,14 @@ module.exports = class TimeSchedule {
         name: start.actName,
         data: {
           starters: start.Registrants,
+          startId: start.id,
           event: scheduleItem.event,
           category: scheduleItem.category
         },
         startTime: start.started,
         wantedStartTime: startStartTime,
         expectedStartTime: start.started || new Date(
-          Math.max(startStartTime.getTime(), earliestNextStart.getTime())
+          Math.max(startStartTime.getTime(), earliestNextStart.getTime(), new Date().getTime())
         ),
         duration:
           eventWithCategory.EventCategories[0].actTime +
