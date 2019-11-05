@@ -5,7 +5,8 @@ const dbConfig = {
   password: config.db.credentials.password,
   database: config.db.database,
   host: config.db.host,
-  dialect: config.db.dialect
+  dialect: config.db.dialect,
+  logging: false
 };
 
 module.exports = {

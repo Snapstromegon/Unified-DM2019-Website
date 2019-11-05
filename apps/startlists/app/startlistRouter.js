@@ -1,7 +1,5 @@
 const express = require('express');
 const sequelize = require('sequelize');
-
-const timeSchedule = require('../../../config/timeSchedule.json');
 const { requireRole } = require('./utils.js');
 
 const router = express.Router();

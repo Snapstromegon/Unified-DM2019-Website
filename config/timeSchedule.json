@@ -1,33 +1,33 @@
 [
   {
     "event": "Einzelkür",
-    "category": "U11",
+    "category": "W U11",
     "start": "2019-11-15T13:00:00.000+01:00"
   },
   {
     "event": "Einzelkür",
-    "category": "U12",
+    "category": "W U12",
     "start": "2019-11-15T13:22:00.000+01:00",
     "warmupTime": 2
   },
   {
     "event": "Einzelkür",
-    "category": "U13",
+    "category": "W U13",
     "start": "2019-11-15T13:52:00.000+01:00"
   },
   {
     "event": "Einzelkür",
-    "category": "U15",
+    "category": "W U15",
     "start": "2019-11-15T14:32:00.000+01:00"
   },
   {
     "event": "Einzelkür",
-    "category": "U16",
+    "category": "W U16",
     "start": "2019-11-15T15:32:00.000+01:00"
   },
   {
     "event": "Einzelkür",
-    "category": "U17",
+    "category": "W U17",
     "start": "2019-11-15T16:42:00.000+01:00"
   },
   {
@@ -38,17 +38,133 @@
   },
   {
     "event": "Einzelkür",
-    "category": "U19",
+    "category": "W U19",
     "start": "2019-11-15T18:04:00.000+01:00"
   },
   {
     "event": "Einzelkür",
-    "category": "U22",
+    "category": "W U22",
     "start": "2019-11-15T19:14:00.000+01:00"
   },
   {
     "event": "Einzelkür",
-    "category": "Ü22",
+    "category": "W Ü22",
     "start": "2019-11-15T20:12:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "M Junior Expert",
+    "start": "2019-11-16T08:00:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "M Expert",
+    "warmupTime": 2,
+    "start": "2019-11-16T08:10:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "W Junior Expert",
+    "start": "2019-11-16T09:24:00.000+01:00"
+  },
+  {
+    "event": "Einzelkür",
+    "category": "W Expert",
+    "start": "2019-11-16T10:34:00.000+01:00"
+  },
+  {
+    "type": "break",
+    "duration": 30,
+    "label": "Siegerehrung ab W U17 bis einschl. Über 22",
+    "start": "2019-11-15T17:24:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U13",
+    "start": "2019-11-16T12:34:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U14",
+    "start": "2019-11-16T13:24:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U15",
+    "start": "2019-11-16T13:59:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U16",
+    "start": "2019-11-16T14:44:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U17",
+    "start": "2019-11-16T15:54:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U19",
+    "start": "2019-11-16T16:40:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U21",
+    "start": "2019-11-16T17:38:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "U24",
+    "start": "2019-11-16T18:18:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "Ü24",
+    "start": "2019-11-16T19:04:00.000+01:00"
+  },
+  {
+    "type": "break",
+    "duration": 30,
+    "label": "Siegerehrung Einzel Expert und Paar bis einschl. Über 24",
+    "start": "2019-11-16T19:40:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "Junior Expert",
+    "start": "2019-11-17T08:00:00.000+01:00"
+  },
+  {
+    "event": "Paarkür",
+    "category": "Expert",
+    "start": "2019-11-17T08:40:00.000+01:00"
+  },
+  {
+    "event": "Kleingruppe",
+    "category": "Junior Expert",
+    "warmupTime": 20,
+    "start": "2019-11-17T10:28:00.000+01:00"
+  },
+  {
+    "event": "Kleingruppe",
+    "category": "Expert",
+    "start": "2019-11-17T11:34:00.000+01:00"
+  },
+  {
+    "event": "Großgruppe",
+    "category": "Junior Expert",
+    "warmupTime": 20,
+    "start": "2019-11-17T13:54:00.000+01:00"
+  },
+  {
+    "event": "Großgruppe",
+    "category": "Expert",
+    "start": "2019-11-17T14:44:00.000+01:00"
+  },
+  {
+    "type": "break",
+    "duration": 30,
+    "label": "Siegerehrung Paar ab Junior Expert + Gruppen",
+    "start": "2019-11-17T16:24:00.000+01:00"
   }
 ]

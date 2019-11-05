@@ -1,0 +1,33 @@
+{% set currentPage="Zeitplan" %}
+
+{% extends "../base.njk" %}
+
+{% macro printDate(date) %}
+{{date.getDate()}}.{{date.getMonth()+1}}. 
+{{"0"+date.getHours() if date.getHours() < 10 else date.getHours()}}:{{"0"+date.getMinutes() if date.getMinutes() < 10 else date.getMinutes()}}
+{% endmacro %}
+
+{% block main %}
+{# <div class="content"> #}
+  <h1>Startliste</h1>
+      <table>
+        <tbody>
+  {%for start in schedule%}
+            <tr>
+              <td>{{printDate(start.expectedStartTime)}}</td>
+              <td>{{start.data.event}}</td>
+              <td>{{start.data.category}}</td>
+              <td>{{start.name}}</td>
+              <td>
+                <ul>
+                  {%for starter in start.data.starters%}
+                    <li>{{starter.User.name}}</li>
+                  {%endfor%}
+                </ul>
+              </td>
+            </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+{# </div> #}
+{% endblock %}

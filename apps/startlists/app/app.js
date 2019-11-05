@@ -45,6 +45,7 @@ module.exports = options => {
     res.redirect('/myActs');
   })
 
+  app.use('/timeplan', requireLogin, require('./timeplanRouter.js'));
   app.use('/startlist', requireLogin, require('./startlistRouter.js'));
   app.use('/admin', requireLogin, require('./adminRouter.js'));
 
