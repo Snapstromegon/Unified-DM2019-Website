@@ -42,7 +42,7 @@ router.get('/nextStarter/json', cors(), async (req, res) => {
     schedule.find(
       item =>
         !item.startTime &&
-        ('data' in item && 'starters' in item.data && item.data.starters.length)
+        (('data' in item && item.data) && ('starters' in item.data && item.data.starters) && item.data.starters.length)
     )
   );
 });
