@@ -24,30 +24,28 @@ router.get('/', async (req, res) => {
 
 router.get('/json', cors(), async (req, res) => {
   let schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
-  if(req.query.withoutPast){
+  if (req.query.withoutPast) {
     schedule = schedule.filter(item => !item.started);
     schedule.reverse();
     const current = schedule.find(item => item.started);
     schedule.reverse();
-    if(current) {
+    if (current) {
       schedule.unshift(current);
     }
   }
-  res.json(req.query.limit ? schedule.slice(0,parseInt(req.query.limit)): schedule);
-});
-
-router.get('/nextStarter/json', cors(), async (req, res) => {
-  const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
   res.json(
-    schedule.find(
-      item =>
-        !item.startTime &&
-        (('data' in item && item.data) && ('starters' in item.data && item.data.starters) && item.data.starters.length)
-    )
+    req.query.limit ? schedule.slice(0, parseInt(req.query.limit)) : schedule
   );
 });
 
-router.get('/nextStarter', async (req, res) => {
+router.get('/nextStart/json', cors(), async (req, res) => {
+  const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
+  res.json(
+    schedule.find(item => !item.startTime && item.data && item.data.start)
+  );
+});
+
+router.get('/nextStart', async (req, res) => {
   const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
   res.render('pages/admin/nextStart.njk', {
     req,
