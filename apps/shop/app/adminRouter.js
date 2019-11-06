@@ -8,6 +8,7 @@ const {
   ShopOrder,
   ShopOrderItemSelection,
   ShopItemOption,
+  ShopItemPicture,
   ShopItem
 } = require('../../../models/index.js');
 
@@ -135,5 +136,51 @@ router.get(
     res.render('pages/admin/stats.njk', { req, stats, items });
   }
 );
+
+router.post('/addOrder', requireRole('Admin'), async (req, res, next) => {
+  let order = new ShopOrder();
+  await order.save();
+
+  for (const selectOption in req.body.selectOption) {
+    const optionCount = parseInt(req.body.selectOption[selectOption]);
+    if (optionCount > 0) {
+      const option = await ShopItemOption.findByPk(
+        parseInt(selectOption.substr(1))
+      );
+      const orderItemSelection = (await ShopOrderItemSelection.findOrCreate({
+        where: {
+          ShopOrderId: order.id,
+          ShopItemOptionId: option.id
+        }
+      }))[0];
+      orderItemSelection.count = optionCount;
+      await orderItemSelection.save();
+    }
+  }
+  order.hasToBePaid = true;
+  const user = (await Registrant.findOne({
+    where: { iufId: req.body.iufId },
+    include: [User]
+  })).User;
+  order.setUser(user);
+  await order.save();
+  next();
+});
+
+router.all('/addOrder', requireRole('Admin'), async (req, res) => {
+  const shopItems = await ShopItem.findAll({
+    include: [
+      {
+        model: ShopItemOption,
+        order: [['id', 'ASC']]
+      },
+      ShopItemPicture
+    ]
+  });
+  res.render('pages/admin/addOrder.njk', {
+    shopItems,
+    req
+  });
+});
 
 module.exports = router;

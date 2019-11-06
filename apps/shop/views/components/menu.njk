@@ -25,6 +25,9 @@
       <a href="/admin/listAll" {{ 'class=active' if "Payment All" == currentPage }}>Bestellungen</a>
       <a href="/admin/stats" {{ 'class=active' if "Stats" == currentPage }}>Stats</a>
     {% endif %}
+    {% if req.user.hasRole('Admin') %}
+      <a href="/admin/addOrder" {{ 'class=active' if "Add Order" == currentPage }}>Add Order</a>
+    {% endif %}
   {%else%}
     <a href="https://login.freestyledm2019.de/?redirectBack=https://shop.freestyledm2019.de">Login</a>
   {% endif %}
