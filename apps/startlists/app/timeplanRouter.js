@@ -1,5 +1,6 @@
 const express = require('express');
 const sequelize = require('sequelize');
+const cors = require('cors');
 
 const {
   Event,
@@ -21,12 +22,12 @@ router.get('/', async (req, res) => {
   res.render('pages/timeplan.njk', { req, schedule });
 });
 
-router.get('/json', async (req, res) => {
+router.get('/json', cors(), async (req, res) => {
   const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
   res.json(req.query.limit ? schedule.slice(0,parseInt(req.query.limit)): schedule);
 });
 
-router.get('/nextStarter/json', async (req, res) => {
+router.get('/nextStarter/json', cors(), async (req, res) => {
   const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
   res.json(
     schedule.find(
