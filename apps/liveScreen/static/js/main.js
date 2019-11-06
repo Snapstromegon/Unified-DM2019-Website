@@ -12,13 +12,19 @@ const CATEGORY_SHORT = {
   'W Expert': 'W E',
   'W Junior Expert': 'W JE'
 };
-(async () => {
-  const res = await loadScheduleFromNowOn();
+window.setInterval(update, 20000);
+update();
+
+async function update(){
+  console.log("update");
+  const res = await loadScheduleFromNowOn(300);
   renderUpcoming(res.slice(res.length > 0 ? (res[0].started ? 1 : 0) : []));
   if(res[0].started){
     renderCurrent(res[0]);
   }
-})();
+  renderCurrent(res[211]);
+}
+
 async function loadScheduleFromNowOn(count=16, withoutPast=true) {
   const resp = await fetch(
     `https://startlists.freestyledm2019.de/timeplan/json?limit=${count}&withoutPast=${withoutPast}`,

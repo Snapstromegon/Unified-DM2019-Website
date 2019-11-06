@@ -221,7 +221,7 @@ p {
 }
 
 #logo {
-  height: 15rem;
+  height: 10rem;
   float: left;
 }
 
@@ -231,11 +231,11 @@ header h2 {
 }
 
 header h1 {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 header h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 aside h1 {
@@ -262,7 +262,7 @@ main {
 }
 #currentAct_Name{
   grid-area: name;
-  font-size: 3rem;
+  font-size: 4rem;
   text-align: right;
 }
 #currentAct_Starters{
