@@ -17,10 +17,10 @@
               <td>{{printDate(start.expectedStartTime)}}</td>
               <td>{{start.data.event}}</td>
               <td>{{start.data.category}}</td>
-              <td>{{start.name}}</td>
+              <td>{{start.data.start.actName}}</td>
               <td>
                 <ul>
-                  {%for starter in start.data.starters%}
+                  {%for starter in start.data.start.Registrants%}
                     <li>{{starter.User.name}}</li>
                   {%endfor%}
                 </ul>

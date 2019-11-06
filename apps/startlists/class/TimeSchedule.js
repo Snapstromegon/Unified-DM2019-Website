@@ -88,16 +88,20 @@ module.exports = class TimeSchedule {
           include: [
             {
               model: EventStart,
+              attributes: ['id', 'actName', 'orderPosition', 'started'],
               where: {
                 orderPosition: {
                   [sequelize.Op.not]: null
                 }
               },
               include: [
-                EventStartMusic,
+                {
+                  model: EventStartMusic
+                },
                 {
                   model: Registrant,
-                  include: [User]
+                  include: [{ model: User, attributes: ['id', 'name'] }],
+                  attributes: ['id', 'iufId', 'club']
                 }
               ]
             }
@@ -135,11 +139,15 @@ module.exports = class TimeSchedule {
       results[0].expectedStartTime = results[0].startTime;
     }
     if (eventWithCategory.EventCategories[0].EventStarts[0].started) {
-      results[0].startTime = new Date(eventWithCategory.EventCategories[0].EventStarts[0].started);
-      results[0].startTime.setMinutes(results[0].startTime.getMinutes() - scheduleItem.warmupTime);
+      results[0].startTime = new Date(
+        eventWithCategory.EventCategories[0].EventStarts[0].started
+      );
+      results[0].startTime.setMinutes(
+        results[0].startTime.getMinutes() - scheduleItem.warmupTime
+      );
       results[0].expectedStartTime = results[0].startTime;
     }
-    
+
     let startTimeOffset = 0;
     for (const start of eventWithCategory.EventCategories[0].EventStarts) {
       const startStartTime = new Date(scheduleItem.start);
@@ -147,16 +155,21 @@ module.exports = class TimeSchedule {
       const startTsei = new TimeScheduleEventItem({
         name: start.actName,
         data: {
-          starters: start.Registrants,
-          startId: start.id,
+          start: start,
           event: scheduleItem.event,
           category: scheduleItem.category
         },
         startTime: start.started,
         wantedStartTime: startStartTime,
-        expectedStartTime: start.started || new Date(
-          Math.max(startStartTime.getTime(), earliestNextStart.getTime(), new Date().getTime())
-        ),
+        expectedStartTime:
+          start.started ||
+          new Date(
+            Math.max(
+              startStartTime.getTime(),
+              earliestNextStart.getTime(),
+              new Date().getTime()
+            )
+          ),
         duration:
           eventWithCategory.EventCategories[0].actTime +
           eventWithCategory.EventCategories[0].juryTime
