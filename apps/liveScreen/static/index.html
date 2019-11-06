@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/css/main.css">
-  <title>Livescreen DM 2019</title>
-  <script src="/js/main.js" type="module"></script>
-</head>
-<body>
-  <aside>
-    <div class="devider">
-      <div class="devider-blue"></div>
-      <div class="devider-red"></div>
-      <div class="devider-yellow"></div>
-    </div>
-    <div class="content">
-      <h1>Zeitplan</h1>
-    </div>
-    <div id="upcomingStarters"></div>
-  </aside>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Livescreen DM 2019</title>
+    <script src="/js/main.js" type="module"></script>
+  </head>
+  <body>
+    <aside>
+      <div class="devider">
+        <div class="devider-blue"></div>
+        <div class="devider-red"></div>
+        <div class="devider-yellow"></div>
+      </div>
+      <div class="content">
+        <h1>Zeitplan</h1>
+      </div>
+      <div id="upcomingStarters"></div>
+    </aside>
 
-  <main></main>
-</body>
+    <header>
+      <img src="/res/img/logo_light_new.svg" id="logo" />
+      <h1>
+        Deutsche Meisterschaft<br />
+        Einrad Freestyle 2019
+      </h1>
+      <h2>15. - 17. November: SSV Nümbrecht</h2>
+    </header>
+    <main>
+      <div id="eventCategory">
+        <p id="currentAct_Event"></p>
+        <p id="currentAct_Category"></p>
+      </div>
+      <p id="currentAct_Name"></p>
+      <ul id="currentAct_Starters">
+        <li></li>
+      </ul>
+    </main>
+  </body>
 </html>

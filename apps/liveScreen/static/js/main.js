@@ -7,17 +7,22 @@ const EVENT_SHORT = {
 };
 
 const CATEGORY_SHORT = {
-  Expert: 'E',
-  'Junior Expert': 'JE'
+  'M Expert': 'M E',
+  'M Junior Expert': 'M JE',
+  'W Expert': 'W E',
+  'W Junior Expert': 'W JE'
 };
 (async () => {
-  const res = await loadScheduleFromNowOn();
+  const res = await loadScheduleFromNowOn(300);
   renderUpcoming(res.slice(res.length > 0 ? (res[0].started ? 1 : 0) : []));
-  console.log(res);
+  if(res[0].started){
+    renderCurrent(res[0]);
+  }
+  renderCurrent(res.slice(-10)[0]);
 })();
-async function loadScheduleFromNowOn() {
+async function loadScheduleFromNowOn(count=16, withoutPast=true) {
   const resp = await fetch(
-    'https://startlists.freestyledm2019.de/timeplan/json?limit=16&withoutPast=true',
+    `https://startlists.freestyledm2019.de/timeplan/json?limit=${count}&withoutPast=${withoutPast}`,
     { mode: 'cors', cache: 'no-cache' }
   );
   return (await resp.json()).map(item => {
@@ -27,6 +32,26 @@ async function loadScheduleFromNowOn() {
     return item;
   });
 }
+
+function renderCurrent(item){
+  const event = document.querySelector('#currentAct_Event');
+  const category = document.querySelector('#currentAct_Category');
+  const name = document.querySelector('#currentAct_Name');
+  const starters = document.querySelector('#currentAct_Starters');
+
+  if(item.data && item.data.start){
+    event.innerHTML = item.data.event;
+    category.innerHTML = item.data.category;
+    name.innerHTML = item.data.start.actName;
+    starters.innerHTML = item.data.start.Registrants.map(r => `<li>#${r.iufId} ${r.User.name}</li>`).join('\n');
+  } else {
+    event.innerHTML = '';
+    category.innerHTML = '';
+    name.innerHTML = item.name;
+    starters.innerHTML = '';
+  }
+}
+
 function renderUpcoming(schedule) {
   const wrapper = document.querySelector('#upcomingStarters');
   wrapper.innerHTML = '';
