@@ -17,7 +17,7 @@ const CATEGORY_SHORT = {
 })();
 async function loadScheduleFromNowOn() {
   const resp = await fetch(
-    'https://startlists.freestyledm2019.de/timeplan/json?limit=300&withoutPast=true',
+    'https://startlists.freestyledm2019.de/timeplan/json?limit=16&withoutPast=true',
     { mode: 'cors', cache: 'no-cache' }
   );
   return (await resp.json()).map(item => {
@@ -58,13 +58,10 @@ function renderBreak(item) {
 
 function renderWarmup(item) {
   return `
-  <div class="scheduleItem">
+  <div class="scheduleItem break">
     <div class="date">${DAYS[item.expectedStartTime.getDay()]}.${fill0(
     item.expectedStartTime.getHours()
   )}:${fill0(item.expectedStartTime.getMinutes())}</div> 
-    <div class="event">${EVENT_SHORT[item.data.event]} ${CATEGORY_SHORT[
-    item.data.category
-  ] || item.data.category}</div>
     <div class="name">${item.name}</div>
   </div>
 `;
