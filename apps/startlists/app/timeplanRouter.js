@@ -22,7 +22,8 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/json', async (req, res) => {
-  res.json(await new TimeSchedule(timeSchedulePlan).schedulePromise);
+  const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
+  res.json(req.query.limit ? schedule.slice(0,parseInt(req.query.limit)): schedule);
 });
 
 router.get('/nextStarter/json', async (req, res) => {
