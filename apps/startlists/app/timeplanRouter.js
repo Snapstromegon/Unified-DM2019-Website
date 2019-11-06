@@ -49,11 +49,7 @@ router.get('/nextStart', async (req, res) => {
   const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
   res.render('pages/admin/nextStart.njk', {
     req,
-    nextStart: schedule.find(
-      item =>
-        !item.startTime &&
-        ('data' in item && 'starters' in item.data && item.data.starters.length)
-    )
+    nextStart: schedule.find(item => !item.startTime && item.data && item.data.start)
   });
 });
 
