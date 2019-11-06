@@ -25,6 +25,11 @@
       },
       "paymentDataLocation": "./DM-payments-UTF8.csv"
     },
+    "liveScreen": {
+      "express": {
+        "port": 93
+      }
+    },
     "db": {
       "credentialsFile": "./.my.cnf",
       "credentialsName": "client",
@@ -68,6 +73,11 @@
         "port": 9093
       },
       "paymentDataLocation": "/home/odm2019/DM-payments-UTF8.csv"
+    },
+    "liveScreen": {
+      "express": {
+        "port": 9094
+      }
     },
     "db": {
       "credentialsFile": "/home/odm2019/.my.cnf",
