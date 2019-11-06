@@ -13,12 +13,11 @@ const CATEGORY_SHORT = {
   'W Junior Expert': 'W JE'
 };
 (async () => {
-  const res = await loadScheduleFromNowOn(300);
+  const res = await loadScheduleFromNowOn();
   renderUpcoming(res.slice(res.length > 0 ? (res[0].started ? 1 : 0) : []));
   if(res[0].started){
     renderCurrent(res[0]);
   }
-  renderCurrent(res.slice(-10)[0]);
 })();
 async function loadScheduleFromNowOn(count=16, withoutPast=true) {
   const resp = await fetch(
