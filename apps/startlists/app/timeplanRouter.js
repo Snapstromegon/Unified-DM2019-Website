@@ -26,7 +26,10 @@ router.get('/json', cors(), async (req, res) => {
   let schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
   if(req.query.withoutPast){
     schedule = schedule.filter(item => !item.started);
-    schedule.unshift(schedule.reverse().find(item => item.started));
+    const current = schedule.reverse().find(item => item.started);
+    if(current) {
+      schedule.unshift(current);
+    }
   }
   res.json(req.query.limit ? schedule.slice(0,parseInt(req.query.limit)): schedule);
 });
