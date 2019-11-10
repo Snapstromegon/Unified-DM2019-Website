@@ -119,7 +119,7 @@ router.get('/commitOrder', requireLogin, async (req, res) => {
 });
 
 router.all('/myOrders', requireLogin, async (req, res) => {
-  const orders = await ShopOrder.findAllIncludingItems({where: {UserId: req.user.id}});
+  const orders = await ShopOrder.findAllIncludingItems({where: {UserId: req.user.id, hasToBePaid: true}});
   res.render('pages/userOrders.njk', { req, orders });
 });
 

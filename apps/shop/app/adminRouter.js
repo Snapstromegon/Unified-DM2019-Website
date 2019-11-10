@@ -57,7 +57,8 @@ router.get(
     for (const user of users) {
       user.orders = await ShopOrder.findAllIncludingItems({
         where: {
-          UserId: user.id
+          UserId: user.id,
+          hasToBePaid: true
         }
       });
     }
