@@ -1,20 +1,39 @@
-{% set currentPage="next start" %}
+{% set currentPage="LiveScreenControl" %}
 
 {% extends "../../base.njk" %}
 
 {% block main %}
 <div class="content">
+  {% if nextStart %}
   <h1>Nächster Start</h1>
-              <p>{{nextStart.data.startId}}</p>
-              <p>{{nextStart.data.event}}</p>
-              <p>{{nextStart.data.category}}</p>
-              <p>{{nextStart.name}}</p>
-              <p>
-                <ul>
-                  {%for starter in nextStart.data.starters%}
-                    <li>{{starter.User.name}}</li>
-                  {%endfor%}
-                </ul>
-              </p>
+  <h2><a href="/timeplan/starts/{{nextStart.data.start.id}}/startNow">Start</a></h2>
+  <p>{{nextStart.data.start.id}}</p>
+  <p>{{nextStart.data.event}}</p>
+  <p>{{nextStart.data.category}}</p>
+  <p>{{nextStart.data.start.actName}}</p>
+  <p>
+    <ul>
+      {%for starter in nextStart.data.start.Registrants%}
+        <li>{{starter.User.name}}</li>
+      {%endfor%}
+    </ul>
+  </p>
+  {% endif %}
+
+  {% if lastStart %}
+  <h1>Letzter Start</h1>
+  <h2><a href="/timeplan/starts/{{lastStart.data.start.id}}/unstarted">Zurück</a></h2>
+  <p>{{lastStart.data.start.id}}</p>
+  <p>{{lastStart.data.event}}</p>
+  <p>{{lastStart.data.category}}</p>
+  <p>{{lastStart.data.start.actName}}</p>
+  <p>
+    <ul>
+      {%for starter in lastStart.data.start.Registrants%}
+        <li>{{starter.User.name}}</li>
+      {%endfor%}
+    </ul>
+  </p>
+  {% endif %}
 </div>
 {% endblock %}

@@ -8,7 +8,7 @@ function requireLogin(req, res, next){
 
 function requireRole(...roles) {
   return function (req, res, next) {
-    if(req.user.hasRole(...roles)){
+    if(req.user && req.user.hasRole(...roles)){
       next();
     } else {
       res.status(403).end();

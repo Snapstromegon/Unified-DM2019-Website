@@ -25,10 +25,10 @@ router.get('/', async (req, res) => {
 router.get('/json', cors(), async (req, res) => {
   let schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
   if (req.query.withoutPast) {
-    schedule = schedule.filter(item => !item.started);
     schedule.reverse();
-    const current = schedule.find(item => item.started);
+    const current = schedule.find(item => item.startTime);
     schedule.reverse();
+    schedule = schedule.filter(item => !item.startTime);
     if (current) {
       schedule.unshift(current);
     }
@@ -47,9 +47,13 @@ router.get('/nextStart/json', cors(), async (req, res) => {
 
 router.get('/nextStart', async (req, res) => {
   const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
+  const nextStart = schedule.find(item => !item.startTime && item.data && item.data.start);
+  schedule.reverse();
+  const lastStart = schedule.find(item => item.startTime && item.data && item.data.start);
   res.render('pages/admin/nextStart.njk', {
     req,
-    nextStart: schedule.find(item => !item.startTime && item.data && item.data.start)
+    nextStart,
+    lastStart
   });
 });
 
@@ -57,14 +61,14 @@ router.get('/starts/:id/startNow', requireRole('Admin'), async (req, res) => {
   const start = await EventStart.findByPk(parseInt(req.params.id));
   start.started = new Date();
   await start.save();
-  res.json(start);
+  res.redirect('/timeplan/nextStart');
 });
 
 router.get('/starts/:id/unstarted', requireRole('Admin'), async (req, res) => {
   const start = await EventStart.findByPk(parseInt(req.params.id));
   start.started = null;
   await start.save();
-  res.json(start);
+  res.redirect('/timeplan/nextStart');
 });
 
 module.exports = router;
