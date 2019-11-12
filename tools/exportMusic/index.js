@@ -33,7 +33,7 @@ async function main() {
     await fs.promises.rmdir(targetPath, { recursive: true });
   }
 
-  let i = 0;
+  let i = 1;
   let failed = [];
 
   for (const start of starts) {
