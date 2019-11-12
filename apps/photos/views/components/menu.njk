@@ -1,0 +1,26 @@
+{% set navLinks = [
+  {
+    url: '/random',
+    name: 'Zufällig'
+  },
+  {
+    url: '/all',
+    name: 'Alle'
+  }
+]%}
+
+<nav>
+  {% for navLink in navLinks %}
+    <a href="{{navLink.url}}" {{ 'class=active' if navLink.name == currentPage }}>{{navLink.name}}</a>
+  {% endfor %}
+
+  {% if req.user %}
+    <a href="https://login.freestyledm2019.de/logout?redirectBack=https://photos.freestyledm2019.de">Logout</a>
+    {% if req.user.hasRole('Photo') %}
+      <h2>Admin</h2>
+      <a href="/admin/upload" {{ 'class=active' if "upload" == currentPage }}>Upload</a>
+    {% endif %}
+  {%else%}
+    <a href="https://login.freestyledm2019.de/?redirectBack=https://photos.freestyledm2019.de">Login</a>
+  {% endif %}
+</nav>

@@ -1,0 +1,22 @@
+{% set currentPage="upload" %}
+
+{% extends "../base.njk" %}
+
+{% block main %}
+<div class="content">
+  <h1>Alle Bilder</h1>
+  <div class="pageNav">
+    <a href="?page={{page-1}}&perPage={{perPage}}"><</a>
+    <a href="?page={{page+1}}&perPage={{perPage}}">></a>
+  </div>
+  <div class="imgGrid">
+  {%for image in images%}
+  <a href="/photos/{{image}}.webp"><picture>
+    <source type="image/webp" srcset="/photos/{{image}}.webp">
+    <source type="image/jpg" srcset="/photos/{{image}}.jpg">
+    <img src="/photos/{{image}}.jpg" alt="Bild der DM">
+  </picture></a>
+  {%endfor%}
+</div>
+</div>
+{% endblock %}

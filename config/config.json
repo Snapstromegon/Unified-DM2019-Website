@@ -30,6 +30,11 @@
         "port": 93
       }
     },
+    "photos": {
+      "express": {
+        "port": 94
+      }
+    },
     "db": {
       "credentialsFile": "./.my.cnf",
       "credentialsName": "client",
@@ -77,6 +82,11 @@
     "liveScreen": {
       "express": {
         "port": 9094
+      }
+    },
+    "photos": {
+      "express": {
+        "port": 9095
       }
     },
     "db": {
