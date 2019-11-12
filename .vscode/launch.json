@@ -25,6 +25,13 @@
       "name": "Launch Payments",
       "cwd": "${workspaceFolder}/apps/payments",
       "program": "${workspaceFolder}/apps/payments/index.js"
+    },{
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Export",
+      "cwd": "${workspaceFolder}/",
+      "program": "${workspaceFolder}/tools/exportMusic/index.js",
+      "args": ["--output", "./musicExport"]
     }
   ]
 }
