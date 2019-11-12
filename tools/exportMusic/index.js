@@ -8,7 +8,7 @@ const sanitize = require("sanitize-filename");
 const { EventStart, EventStartMusic } = require("../../models/index.js");
 
 async function main() {
-  const targetPath = path.resolve(argv.output || "~/musicExport");
+  const targetPath = path.resolve(argv.output || "/home/odm2019/musicExport");
   console.log(`exporting to ${targetPath}`);
   const starts = await EventStart.findAll({
     where: {
