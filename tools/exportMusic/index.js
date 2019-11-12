@@ -57,6 +57,7 @@ async function main() {
         start.EventStartMusics[0].filepath,
         path.join(exportedFolder, exportedFilename)
       );
+      console.log(`copied to ${path.join(exportedFolder, exportedFilename)}`)
     } catch (e) {
       failed.push(start);
       console.trace(e);
