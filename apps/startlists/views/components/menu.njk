@@ -25,7 +25,7 @@
       <a href="/startlist" {{ 'class=active' if "Startliste" == currentPage }}>Startliste</a>
     {% endif %}
     {% if req.user.hasRole('Admin') %}
-      <a href="/startlist" {{ 'class=active' if "LiveScreenControl" == currentPage }}>Live Control</a>
+      <a href="/timeplan/nextstart" {{ 'class=active' if "LiveScreenControl" == currentPage }}>Live Control</a>
     {% endif %}
   {%else%}
     <a href="https://login.freestyledm2019.de/?redirectBack=https://startlists.freestyledm2019.de">Login</a>
