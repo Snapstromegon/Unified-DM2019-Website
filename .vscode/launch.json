@@ -28,6 +28,12 @@
     },{
       "type": "node",
       "request": "launch",
+      "name": "Launch Photos",
+      "cwd": "${workspaceFolder}/apps/photos",
+      "program": "${workspaceFolder}/apps/photos/index.js"
+    },{
+      "type": "node",
+      "request": "launch",
       "name": "Launch Export",
       "cwd": "${workspaceFolder}/",
       "program": "${workspaceFolder}/tools/exportMusic/index.js",
