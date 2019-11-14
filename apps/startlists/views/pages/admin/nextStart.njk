@@ -4,6 +4,9 @@
 
 {% block main %}
 <div class="content">
+  <h1>Pausenmdus</h1>
+  <a href="/timeplan/paused/{{not mode.paused}}">Pause {{'stoppen' if mode.paused else 'starten'}}</a><br>
+  <a href="/timeplan/showImages/{{not mode.showImages}}">showImages {{'stoppen' if mode.showImages else 'starten'}}</a>
   {% if nextStart %}
   <h1>Nächster Start</h1>
   <h2><a href="/timeplan/starts/{{nextStart.data.start.id}}/startNow">Start</a></h2>

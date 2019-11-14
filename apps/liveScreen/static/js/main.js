@@ -1,22 +1,88 @@
-const DAYS = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+const DAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 const EVENT_SHORT = {
-  Einzelkür: "EK",
-  Paarkür: "PK",
-  Kleingruppe: "KG",
-  Großgruppe: "GG"
+  Einzelkür: 'EK',
+  Paarkür: 'PK',
+  Kleingruppe: 'KG',
+  Großgruppe: 'GG'
 };
 
 const CATEGORY_SHORT = {
-  "M Expert": "M E",
-  "M Junior Expert": "M JE",
-  "W Expert": "W E",
-  "W Junior Expert": "W JE"
+  'M Expert': 'M E',
+  'M Junior Expert': 'M JE',
+  'W Expert': 'W E',
+  'W Junior Expert': 'W JE'
 };
+
+// const host = 'http://teapot:91';
+const host = "https://startlists.freestyledm2019.de";
+// const host = 'http://teapot:94';
+const photoHost = "https://photos.freestyledm2019.de";
+
 window.setInterval(update, 5000);
 update();
 
+window.setInterval(updateImages, 5000);
+updateImages();
+
+let mode = {
+  paused: false,
+  showImages: false
+};
+
+async function updateImages() {
+  if (mode.showImages && mode.paused) {
+    const resp = await fetch(`${photoHost}/random/json?limit=1`, {
+      mode: 'cors',
+      cache: 'no-cache'
+    });
+    const images = await resp.json();
+    document.querySelector(
+      '.pauseImages .hidden'
+    ).src = `${photoHost}/photos/${images[0]}.webp`;
+    document
+      .querySelector('.pauseImages .hidden')
+      .addEventListener('load', () => {
+        const active = document.querySelector('.pauseImages .active');
+        const hidden = document.querySelector('.pauseImages .hidden');
+        active.classList.add('hidden');
+        active.classList.remove('active');
+        hidden.classList.add('active');
+        hidden.classList.remove('hidden');
+      });
+  }
+}
+
+function enablePause() {
+  document.querySelector('.pause').classList.remove('hidden');
+}
+function disablePause() {
+  document.querySelector('.pause').classList.add('hidden');
+}
+function enableImages() {
+  document.querySelector('.pauseImages').classList.remove('hidden');
+}
+function disableImages() {
+  document.querySelector('.pauseImages').classList.add('hidden');
+}
+
 async function update() {
-  console.log("update");
+  console.log('update');
+  const resp = await fetch(`${host}/timeplan/mode`, {
+    mode: 'cors',
+    cache: 'no-cache'
+  });
+  mode = await resp.json();
+  if (mode.paused) {
+    if (mode.showImages) {
+      enableImages();
+    } else {
+      disableImages();
+    }
+    enablePause();
+  } else {
+    disablePause();
+  }
+
   const res = await loadScheduleFromNowOn(300);
   renderUpcoming(res.slice(res.length > 0 ? (res[0].startTime ? 1 : 0) : []));
   if (res[0].startTime) {
@@ -29,9 +95,8 @@ async function update() {
 
 async function loadScheduleFromNowOn(count = 16, withoutPast = true) {
   const resp = await fetch(
-    // `http://127.0.0.1:91/timeplan/json?limit=${count}&withoutPast=${withoutPast}`,
-    `https://startlists.freestyledm2019.de/timeplan/json?limit=${count}&withoutPast=${withoutPast}`,
-    { mode: "cors", cache: "no-cache" }
+    `${host}/timeplan/json?limit=${count}&withoutPast=${withoutPast}`,
+    { mode: 'cors', cache: 'no-cache' }
   );
   return (await resp.json()).map(item => {
     item.expectedStartTime = new Date(item.expectedStartTime);
@@ -42,10 +107,10 @@ async function loadScheduleFromNowOn(count = 16, withoutPast = true) {
 }
 
 function renderCurrent(item) {
-  const event = document.querySelector("#currentAct_Event");
-  const category = document.querySelector("#currentAct_Category");
-  const name = document.querySelector("#currentAct_Name");
-  const starters = document.querySelector("#currentAct_Starters");
+  const event = document.querySelector('#currentAct_Event');
+  const category = document.querySelector('#currentAct_Category');
+  const name = document.querySelector('#currentAct_Name');
+  const starters = document.querySelector('#currentAct_Starters');
 
   if (item.data && item.data.start) {
     event.innerHTML = item.data.event;
@@ -53,18 +118,18 @@ function renderCurrent(item) {
     name.innerHTML = item.data.start.actName;
     starters.innerHTML = item.data.start.Registrants.map(
       r => `<li>#${r.iufId} ${r.User.name}</li>`
-    ).join("\n");
+    ).join('\n');
   } else {
-    event.innerHTML = "";
-    category.innerHTML = "";
-    name.innerHTML = item.name || "";
-    starters.innerHTML = "";
+    event.innerHTML = '';
+    category.innerHTML = '';
+    name.innerHTML = item.name || '';
+    starters.innerHTML = '';
   }
 }
 
 function renderUpcoming(schedule) {
-  const wrapper = document.querySelector("#upcomingStarters");
-  wrapper.innerHTML = "";
+  const wrapper = document.querySelector('#upcomingStarters');
+  wrapper.innerHTML = '';
   for (const item of schedule) {
     wrapper.innerHTML += renderItem(item);
   }
@@ -129,7 +194,7 @@ function renderDefault(item) {
     <div class="name">${item.name}</div>
     <div class="actors"><ul>${item.data.start.Registrants.map(
       r => `<li>#${r.iufId} ${r.User.name}</li>`
-    ).join("\n")}</ul></div>
+    ).join('\n')}</ul></div>
   </div>
 `;
 }

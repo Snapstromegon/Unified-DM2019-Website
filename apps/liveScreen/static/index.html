@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/css/main.css">
-  <title>Livescreen DM 2019</title>
-  <script src="/js/main.js" type="module"></script>
-</head>
-<body>
-  <aside>
-    <div class="devider">
-      <div class="devider-blue"></div>
-      <div class="devider-red"></div>
-      <div class="devider-yellow"></div>
-    </div>
-    <div class="content">
-      <h1>Zeitplan</h1>
-    </div>
-    <div id="upcomingStarters"></div>
-  </aside>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Livescreen DM 2019</title>
+    <style>
+      .wc__wrapper {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/wc_base.css" />
+    <script src="/js/wc_main.js"></script>
+    <script src="/js/wc_langPacks/wc_langPack_DE.js"></script>
+    <script src="/js/main.js" type="module"></script>
+  </head>
+  <body>
+    <aside>
+      <div class="devider">
+        <div class="devider-blue"></div>
+        <div class="devider-red"></div>
+        <div class="devider-yellow"></div>
+      </div>
+      <div class="content">
+        <h1>Zeitplan</h1>
+      </div>
+      <div id="upcomingStarters"></div>
+    </aside>
 
-  <header>
+    <header>
       <img src="/res/img/logo_light_new.svg" id="logo" />
       <h1>
         Deutsche Meisterschaft<br />
@@ -38,6 +48,36 @@
       <ul id="currentAct_Starters">
         <li></li>
       </ul>
+      <div class="pause hidden">
+        <div class="wc__wrapper">
+          <!-- This element is your Wrapper and the wc element will fit it parents height and width -->
+          <div class="wc__minutes">
+            <div class="wc__minute wc__minute__1"></div>
+            <div class="wc__minute wc__minute__2"></div>
+            <div class="wc__minute wc__minute__3"></div>
+            <div class="wc__minute wc__minute__4"></div>
+          </div>
+          <div class="wc">
+            <!-- 
+              -This Element will be recognized by the wc_main.js functions and will be filled with content 
+              -To change classnames goto wc_main.js and change 'wc_wcClassName'. (wc_base.css has to be adjusted)
+              -To switch flexboxes justify-content from space-around to space-between add the css class 'wc--lettersOut' to this element
+            -->
+          </div>
+        </div>
+        <div class="pauseImages hidden">
+          <img
+            id="pauseImages_A"
+            class="active"
+            src="https://i.ytimg.com/vi/NR01X2pXZ2Y/maxresdefault.jpg"
+          />
+          <img
+            id="pauseImages_B"
+            class="hidden"
+            src="https://i.ytimg.com/vi/NR01X2pXZ2Y/maxresdefault.jpg"
+          />
+        </div>
+      </div>
     </main>
   </body>
 </html>

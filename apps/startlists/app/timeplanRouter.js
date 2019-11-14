@@ -47,13 +47,18 @@ router.get('/nextStart/json', cors(), async (req, res) => {
 
 router.get('/nextStart', async (req, res) => {
   const schedule = await new TimeSchedule(timeSchedulePlan).schedulePromise;
-  const nextStart = schedule.find(item => !item.startTime && item.data && item.data.start);
+  const nextStart = schedule.find(
+    item => !item.startTime && item.data && item.data.start
+  );
   schedule.reverse();
-  const lastStart = schedule.find(item => item.startTime && item.data && item.data.start);
+  const lastStart = schedule.find(
+    item => item.startTime && item.data && item.data.start
+  );
   res.render('pages/admin/nextStart.njk', {
     req,
     nextStart,
-    lastStart
+    lastStart,
+    mode
   });
 });
 
@@ -68,6 +73,25 @@ router.get('/starts/:id/unstarted', requireRole('Admin'), async (req, res) => {
   const start = await EventStart.findByPk(parseInt(req.params.id));
   start.started = null;
   await start.save();
+  res.redirect('/timeplan/nextStart');
+});
+
+const mode = {
+  paused: false,
+  showImages: false
+};
+
+router.get('/mode', cors(), (req, res) => {
+  res.json(mode);
+});
+
+router.get('/paused/:mode', requireRole('Admin'), (req, res) => {
+  mode.paused = req.params.mode == 'true';
+  res.redirect('/timeplan/nextStart');
+});
+
+router.get('/showImages/:mode', requireRole('Admin'), (req, res) => {
+  mode.showImages = req.params.mode == 'true';
   res.redirect('/timeplan/nextStart');
 });
 

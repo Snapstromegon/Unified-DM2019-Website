@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const cors = require('cors')
 const fsP = fs.promises;
 const path = require('path');
 
@@ -32,10 +33,10 @@ router.get('/random', async (req, res) => {
   );
 });
 
-router.get('/random/json', async (req, res) => {
+router.get('/random/json', cors(), async (req, res) => {
   const images = await getAllImages({ format: req.query.format || '.webp' });
   const shuffled = shuffleArray(images);
-  res.json(shuffled);
+  res.json(shuffled.slice(0, parseInt(req.query.limit) || shuffled.length));
 });
 
 router.get('/all/json', async (req, res) => {
