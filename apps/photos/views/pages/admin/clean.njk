@@ -1,0 +1,14 @@
+{% set currentPage="clean" %}
+
+{% extends "../../base.njk" %}
+
+{% block main %}
+<div class="content">
+  <h1>Clean Tag</h1>
+  {%for tag in tags%}
+    <a href="/admin/clean/{{tag}}">{{tag}}</a>
+  {%endfor%}
+  <h1>Clean All</h1>
+  <a href="/admin/clean/delete_all">Alle löschen!</a>
+</div>
+{% endblock %}

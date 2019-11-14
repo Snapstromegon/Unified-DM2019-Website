@@ -19,6 +19,7 @@
     {% if req.user.hasRole('Photo') %}
       <h2>Admin</h2>
       <a href="/admin/upload" {{ 'class=active' if "upload" == currentPage }}>Upload</a>
+      <a href="/admin/clean" {{ 'class=active' if "clean" == currentPage }}>Clean</a>
     {% endif %}
   {%else%}
     <a href="https://login.freestyledm2019.de/?redirectBack=https://photos.freestyledm2019.de">Login</a>
