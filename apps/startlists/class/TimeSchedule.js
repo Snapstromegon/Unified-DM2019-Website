@@ -117,11 +117,11 @@ module.exports = class TimeSchedule {
     const warmupStart = new Date(
       Math.max(scheduleItem.start.getTime(), earliestNextStart.getTime())
     );
-    warmupStart.setMinutes(warmupStart.getMinutes() + 2*scheduleItem.warmupTime);
+    warmupStart.setMinutes(warmupStart.getMinutes() - scheduleItem.warmupTime);
 
     const wantedWarmupStart = new Date(Math.max(scheduleItem.start.getTime()));
     wantedWarmupStart.setMinutes(
-      wantedWarmupStart.getMinutes() + scheduleItem.warmupTime
+      wantedWarmupStart.getMinutes() - scheduleItem.warmupTime
     );
     const warmupItem = new TimeScheduleEventItem({
       name: 'Warmfahrzeit',
@@ -147,9 +147,9 @@ module.exports = class TimeSchedule {
       results[0].startTime = new Date(
         eventWithCategory.EventCategories[0].EventStarts[0].started
       );
-      // results[0].startTime.setMinutes(
-      //   results[0].startTime.getMinutes() - scheduleItem.warmupTime
-      // );
+      results[0].startTime.setMinutes(
+        results[0].startTime.getMinutes() - scheduleItem.warmupTime
+      );
       results[0].expectedStartTime = results[0].startTime;
     }
 
@@ -182,9 +182,9 @@ module.exports = class TimeSchedule {
       });
       if (!wasFirstStarted && startTsei.startTime) {
         warmupItem.startTime = new Date(startTsei.startTime);
-        // warmupItem.startTime.setMinutes(
-        //   warmupItem.startTime.getMinutes() - scheduleItem.warmupTime - 1
-        // );
+        warmupItem.startTime.setMinutes(
+          warmupItem.startTime.getMinutes() - scheduleItem.warmupTime - 1
+        );
         wasFirstStarted = true;
       }
       startTimeOffset += startTsei.duration;
