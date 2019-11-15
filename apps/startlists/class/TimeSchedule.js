@@ -111,9 +111,9 @@ module.exports = class TimeSchedule {
     });
 
     const results = [];
-    // earliestNextStart.setMinutes(
-    //   earliestNextStart.getMinutes() + scheduleItem.warmupTime
-    // );
+    earliestNextStart.setMinutes(
+      earliestNextStart.getMinutes() + scheduleItem.warmupTime
+    );
     const warmupStart = new Date(
       Math.max(scheduleItem.start.getTime(), earliestNextStart.getTime())
     );
