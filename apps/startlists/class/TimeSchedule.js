@@ -121,21 +121,24 @@ module.exports = class TimeSchedule {
     wantedWarmupStart.setMinutes(
       wantedWarmupStart.getMinutes() - scheduleItem.warmupTime
     );
-
-    results.push(
-      new TimeScheduleEventItem({
-        name: 'Warmfahrzeit',
-        wantedStartTime: wantedWarmupStart,
-        expectedStartTime: warmupStart,
-        duration: scheduleItem.warmupTime,
-        data: {
-          event: scheduleItem.event,
-          category: scheduleItem.category
-        }
-      })
-    );
+    const warmupItem = new TimeScheduleEventItem({
+      name: 'Warmfahrzeit',
+      wantedStartTime: wantedWarmupStart,
+      expectedStartTime: warmupStart,
+      duration: scheduleItem.warmupTime,
+      data: {
+        event: scheduleItem.event,
+        category: scheduleItem.category
+      }
+    });
+    results.push(warmupItem);
     if (Date.now() > results[0].expectedStartTime.getTime()) {
-      results[0].startTime = new Date(Math.max(results[0].expectedStartTime.getTime(), earliestNextStart.getTime()));
+      results[0].startTime = new Date(
+        Math.max(
+          results[0].expectedStartTime.getTime(),
+          earliestNextStart.getTime()
+        )
+      );
       results[0].expectedStartTime = results[0].startTime;
     }
     if (eventWithCategory.EventCategories[0].EventStarts[0].started) {
@@ -174,6 +177,12 @@ module.exports = class TimeSchedule {
           eventWithCategory.EventCategories[0].actTime +
           eventWithCategory.EventCategories[0].juryTime
       });
+      if (startTsei.startTime) {
+        warmupItem.startTime = new Date(startTsei.startTime);
+        warmupItem.startTime.setMinutes(
+          warmupItem.startTime.getMinutes() - scheduleItem.warmupTime - 1
+        );
+      }
       startTimeOffset += startTsei.duration;
       earliestNextStart = this.timeAfter(startTsei);
       results.push(startTsei);
