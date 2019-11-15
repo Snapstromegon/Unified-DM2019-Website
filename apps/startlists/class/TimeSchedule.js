@@ -111,9 +111,9 @@ module.exports = class TimeSchedule {
     });
 
     const results = [];
-    earliestNextStart.setMinutes(
-      earliestNextStart.getMinutes() + scheduleItem.warmupTime
-    );
+    // earliestNextStart.setMinutes(
+    //   earliestNextStart.getMinutes() + scheduleItem.warmupTime
+    // );
     const warmupStart = new Date(
       Math.max(scheduleItem.start.getTime(), earliestNextStart.getTime())
     );
@@ -147,9 +147,9 @@ module.exports = class TimeSchedule {
       results[0].startTime = new Date(
         eventWithCategory.EventCategories[0].EventStarts[0].started
       );
-      results[0].startTime.setMinutes(
-        results[0].startTime.getMinutes() - scheduleItem.warmupTime
-      );
+      // results[0].startTime.setMinutes(
+      //   results[0].startTime.getMinutes() - scheduleItem.warmupTime
+      // );
       results[0].expectedStartTime = results[0].startTime;
     }
 
