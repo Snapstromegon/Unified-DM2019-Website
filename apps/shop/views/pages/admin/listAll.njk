@@ -57,15 +57,15 @@
   <table class="beginn_table">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>IUF</th>
         <th>Name</th>
-        <th>Email</th>
-        <th>UserEmail</th>
-        <th>ZahlungsID</th>
-        <th>Muss gezahlt werden</th>
-        <th>Bezahlt</th>
-        <th>Ausgehändigt</th>
-        <th>Löschen</th>
+        {# <th>Email</th> #}
+        {# <th>UserEmail</th> #}
+        <th>ID</th>
+        <th></th>
+        <th>B</th>
+        <th>A</th>
+        <th></th>
         <th>Bestellung</th>
         <th>Preis Gesamt</th>
       </tr>
@@ -75,15 +75,22 @@
       <tr>
             <td rowspan="{{user.orders.length}}">{{user.Registrant.iufId}}</td>
             <td rowspan="{{user.orders.length}}">{{user.name}}</td>
-            <td rowspan="{{user.orders.length}}">{{user.Registrant.email}}</td>
-            <td rowspan="{{user.orders.length}}">{{user.Registrant.userEmail}}</td>
+            {# <td rowspan="{{user.orders.length}}">{{user.Registrant.email}}</td> #}
+            {# <td rowspan="{{user.orders.length}}">{{user.Registrant.userEmail}}</td> #}
             <td>{{user.orders[0].paymentId}}</td>
             {{orderStatus(user.orders[0])}}
             <td>
-              <table>
+              <ul>
                 {% set items=user.orders[0].items%}
                 {% for item in items %}
                   {% for option in item.ShopItemOptions %}
+                <li>{{option.ShopOrderItemSelections[0].count}}x {{item.label}} {{option.label}}</li>
+                  {% endfor %}
+                  {% endfor %}
+              </ul>
+              {# <table>
+                {% set items=user.orders[0].items%}
+                {% for item in items %}
                     <tr>
                       <td>{{item.label}}</td>
                       {% set optionTotalPrice=option.priceModificator + item.price %}
@@ -92,9 +99,8 @@
                       <td class="right">{{option.ShopOrderItemSelections[0].count}}</td>
                       <td class="right">{{optionTotalPrice * option.ShopOrderItemSelections[0].count}} €</td>
                     </tr>
-                  {% endfor %}
                 {% endfor %}
-              </table>
+              </table> #}
             </td>
             
             <td class="right">{{user.orders[0].totalPrice}} €</td>
@@ -104,7 +110,15 @@
             <td>{{order.paymentId}}</td>
             {{orderStatus(order)}}
             <td>
-              <table>
+              <ul>
+                {% set items=order.items%}
+                {% for item in items %}
+                  {% for option in item.ShopItemOptions %}
+                <li>{{option.ShopOrderItemSelections[0].count}}x {{item.label}} {{option.label}}</li>
+                  {% endfor %}
+                  {% endfor %}
+              </ul>
+              {# <table>
                 {% set items=order.items%}
                 {% for item in items %}
                   {% for option in item.ShopItemOptions %}
@@ -118,7 +132,7 @@
                     </tr>
                   {% endfor %}
                 {% endfor %}
-              </table>
+              </table> #}
             </td>
             
             <td class="right">{{order.totalPrice}} €</td>
