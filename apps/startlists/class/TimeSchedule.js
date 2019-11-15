@@ -152,6 +152,7 @@ module.exports = class TimeSchedule {
     }
 
     let startTimeOffset = 0;
+    let wasFirstStarted = false;
     for (const start of eventWithCategory.EventCategories[0].EventStarts) {
       const startStartTime = new Date(scheduleItem.start);
       startStartTime.setMinutes(startStartTime.getMinutes() + startTimeOffset);
@@ -177,11 +178,12 @@ module.exports = class TimeSchedule {
           eventWithCategory.EventCategories[0].actTime +
           eventWithCategory.EventCategories[0].juryTime
       });
-      if (startTsei.startTime) {
+      if (!wasFirstStarted && startTsei.startTime) {
         warmupItem.startTime = new Date(startTsei.startTime);
         warmupItem.startTime.setMinutes(
           warmupItem.startTime.getMinutes() - scheduleItem.warmupTime - 1
         );
+        wasFirstStarted = true;
       }
       startTimeOffset += startTsei.duration;
       earliestNextStart = this.timeAfter(startTsei);
