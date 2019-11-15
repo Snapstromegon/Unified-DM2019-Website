@@ -71,7 +71,7 @@ module.exports = class TimeSchedule {
       duration: scheduleItem.duration
     });
     if (Date.now() > res.expectedStartTime.getTime()) {
-      res.started = res.expectedStartTime;
+      res.startTime = res.expectedStartTime;
     }
     return [res];
   }
