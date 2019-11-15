@@ -117,12 +117,12 @@ module.exports = class TimeSchedule {
     const warmupStart = new Date(
       Math.max(scheduleItem.start.getTime(), earliestNextStart.getTime())
     );
-    warmupStart.setMinutes(warmupStart.getMinutes() - scheduleItem.warmupTime);
+    // warmupStart.setMinutes(warmupStart.getMinutes() - scheduleItem.warmupTime);
 
     const wantedWarmupStart = new Date(Math.max(scheduleItem.start.getTime()));
-    wantedWarmupStart.setMinutes(
-      wantedWarmupStart.getMinutes() - scheduleItem.warmupTime
-    );
+    // wantedWarmupStart.setMinutes(
+    //   wantedWarmupStart.getMinutes() - scheduleItem.warmupTime
+    // );
     const warmupItem = new TimeScheduleEventItem({
       name: 'Warmfahrzeit',
       wantedStartTime: wantedWarmupStart,
