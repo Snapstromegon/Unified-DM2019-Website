@@ -120,9 +120,9 @@ module.exports = class TimeSchedule {
     // warmupStart.setMinutes(warmupStart.getMinutes() - scheduleItem.warmupTime);
 
     const wantedWarmupStart = new Date(Math.max(scheduleItem.start.getTime()));
-    // wantedWarmupStart.setMinutes(
-    //   wantedWarmupStart.getMinutes() - scheduleItem.warmupTime
-    // );
+    wantedWarmupStart.setMinutes(
+      wantedWarmupStart.getMinutes() + scheduleItem.warmupTime
+    );
     const warmupItem = new TimeScheduleEventItem({
       name: 'Warmfahrzeit',
       wantedStartTime: wantedWarmupStart,
