@@ -135,7 +135,7 @@ module.exports = class TimeSchedule {
       })
     );
     if (Date.now() > results[0].expectedStartTime.getTime()) {
-      results[0].startTime = results[0].expectedStartTime;
+      results[0].startTime = new Date(Math.max(results[0].expectedStartTime.getTime(), earliestNextStart.getTime()));
       results[0].expectedStartTime = results[0].startTime;
     }
     if (eventWithCategory.EventCategories[0].EventStarts[0].started) {
