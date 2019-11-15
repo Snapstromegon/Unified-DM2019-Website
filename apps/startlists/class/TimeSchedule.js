@@ -117,7 +117,7 @@ module.exports = class TimeSchedule {
     const warmupStart = new Date(
       Math.max(scheduleItem.start.getTime(), earliestNextStart.getTime())
     );
-    warmupStart.setMinutes(warmupStart.getMinutes() - scheduleItem.warmupTime);
+    // warmupStart.setMinutes(warmupStart.getMinutes() - scheduleItem.warmupTime);
 
     const wantedWarmupStart = new Date(Math.max(scheduleItem.start.getTime()));
     wantedWarmupStart.setMinutes(
