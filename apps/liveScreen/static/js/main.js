@@ -13,21 +13,22 @@ const CATEGORY_SHORT = {
   'W Junior Expert': 'W JE'
 };
 
-// const host = 'http://teapot:91';
-const host = "https://startlists.freestyledm2019.de";
-// const host = 'http://teapot:94';
-const photoHost = "https://photos.freestyledm2019.de";
-
-window.setInterval(update, 5000);
-update();
-
-window.setInterval(updateImages, 5000);
-updateImages();
-
 let mode = {
   paused: false,
   showImages: false
 };
+
+// const host = 'http://teapot:91';
+const host = 'https://startlists.freestyledm2019.de';
+// const host = 'http://teapot:94';
+const photoHost = 'https://photos.freestyledm2019.de';
+
+window.setInterval(update, 5000);
+update();
+if (document.querySelector('.pause')) {
+  window.setInterval(updateImages, 5000);
+  updateImages();
+}
 
 async function updateImages() {
   if (mode.showImages && mode.paused) {
@@ -72,23 +73,26 @@ async function update() {
     cache: 'no-cache'
   });
   mode = await resp.json();
-  if (mode.paused) {
-    if (mode.showImages) {
-      enableImages();
-    } else {
-      disableImages();
-    }
-    enablePause();
-  } else {
-    disablePause();
-  }
 
   const res = await loadScheduleFromNowOn(300);
   renderUpcoming(res.slice(res.length > 0 ? (res[0].startTime ? 1 : 0) : []));
-  if (res[0].startTime) {
-    renderCurrent(res[0]);
-  } else {
-    renderCurrent({});
+
+  if (document.querySelector('.pause')) {
+    if (mode.paused) {
+      if (mode.showImages) {
+        enableImages();
+      } else {
+        disableImages();
+      }
+      enablePause();
+    } else {
+      disablePause();
+    }
+    if (res[0].startTime) {
+      renderCurrent(res[0]);
+    } else {
+      renderCurrent({});
+    }
   }
   // renderCurrent(res[211]);
 }

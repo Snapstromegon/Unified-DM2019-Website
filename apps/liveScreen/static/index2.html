@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/main2.css" />
     <title>Livescreen DM 2019</title>
-    <script src="/js/main.js" type="module"></script> -->
-    <script>
+    <script src="/js/main.js" type="module"></script>
+    <!-- <script>
       window.location="https://livescreen.freestyledm2019.de/"
-    </script>
+    </script> -->
   </head>
   <body>
-    <!-- <aside>
+    <aside>
       <div class="devider">
         <div class="devider-blue"></div>
         <div class="devider-red"></div>
@@ -24,7 +24,36 @@
       <div id="upcomingStarters"></div>
     </aside>
     <main>
-      <iframe src="https://www.youtube.com/embed/sfOfyL9lBzo?controls=0&autoplay=true" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
-    </main> -->
+      <!-- <iframe src="https://www.youtube.com/embed/sfOfyL9lBzo?controls=0&autoplay=true" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe> -->
+      <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+      <!-- Or if you want a more recent canary version -->
+      <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
+      <video id="video"></video>
+      <script>
+        var video = document.getElementById('video');
+        if (Hls.isSupported()) {
+          var hls = new Hls();
+          hls.loadSource(
+            'https://stream.uniconvention.com/konstantin.m3u8'
+          );
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+          });
+        }
+        // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+        // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
+        // This is using the built-in support of the plain video element, without using hls.js.
+        // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
+        // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src =
+            'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+          video.addEventListener('loadedmetadata', function() {
+            video.play();
+          });
+        }
+      </script>
+    </main>
   </body>
 </html>
