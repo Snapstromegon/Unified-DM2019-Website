@@ -18,7 +18,7 @@ html {
 body {
   height: 100vh;
   display: grid;
-  grid-template-columns: minmax(30rem, 25%) 1fr;
+  grid-template-columns: minmax(80vh, 33%) 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     'aside header'
@@ -32,7 +32,7 @@ h2 {
 header {
   grid-area: header;
   background-color: var(--color-blue);
-  padding-top: 2rem;
+  padding-top: 4vh;
 }
 main {
   grid-area: main;
@@ -42,7 +42,7 @@ main {
 }
 footer {
   grid-area: footer;
-  padding: 1rem;
+  padding: 2vh;
 }
 aside {
   grid-area: aside;
@@ -57,19 +57,19 @@ h3,
 h4,
 h5,
 p {
-  margin-bottom: 0.5rem;
-  margin-top: 0.75rem;
+  margin-bottom: 1vh;
+  margin-top: 1.5vh;
 }
 
 .content {
   width: 100%;
-  padding: 1rem;
+  padding: 2vh;
   margin: auto;
   max-width: 850px;
 }
 
 .devider {
-  --devider-bar-height: 1rem;
+  --devider-bar-height: 2vh;
   overflow: hidden;
   position: relative;
   padding-top: calc((var(--devider-bar-height) * 2) + 12.2785%);
@@ -185,11 +185,11 @@ p {
 .scheduleItem {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-gap: 0.5rem;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 1vh;
   grid-template-rows: auto auto;
   grid-template-areas: 'event name' 'date actors';
-  padding: 0.5rem;
+  padding: 1vh;
   /* border-top: 1px solid #000; */
   background-color: #0001;
 }
@@ -221,7 +221,7 @@ p {
 }
 
 #logo {
-  height: 10rem;
+  height: 20vh;
   float: left;
 }
 
@@ -231,19 +231,19 @@ header h2 {
 }
 
 header h1 {
-  font-size: 3rem;
+  font-size: 6vh;
 }
 
 header h2 {
-  font-size: 1.5rem;
+  font-size: 3vh;
 }
 
 aside h1 {
-  font-size: 3rem;
+  font-size: 6vh;
 }
 
 aside .scheduleItem {
-  font-size: 1.3rem;
+  font-size: 5vh;
 }
 
 main {
@@ -253,35 +253,35 @@ main {
 }
 
 
-main iframe {
+main video {
   width: 100%;
   height: 100%;
 }
 
 #eventCategory{
   grid-area: eventCategory;
-  font-size: 1.75rem;
+  font-size: 3.5vh;
 }
 #currentAct_Name{
   grid-area: name;
-  font-size: 4rem;
+  font-size: 8vh;
   text-align: right;
 }
 #currentAct_Starters{
   grid-area: starters;
   text-align: right;
-  font-size: 1.2rem;
+  font-size: 4vh;
   list-style: none;
   display: grid;
   grid-auto-columns: max-content;
   grid-auto-flow: column;
-  grid-template-rows: repeat(auto-fit, 1.7rem);
+  grid-template-rows: repeat(auto-fit, 3.4vh);
   max-height: 100%;
   min-height: 0;
   max-width: 100%;
   min-width: 0;
   justify-content: end;
-  grid-gap: 0 1rem;
+  grid-gap: 0 2vh;
 }
 
 .hidden {

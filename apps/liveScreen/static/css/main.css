@@ -18,7 +18,7 @@ html {
 body {
   height: 100vh;
   display: grid;
-  grid-template-columns: minmax(50vh, 33%) 1fr;
+  grid-template-columns: minmax(80vh, 33%) 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     'aside header'
@@ -242,7 +242,7 @@ aside h1 {
 }
 
 aside .scheduleItem {
-  font-size: 2.6vh;
+  font-size: 5vh;
 }
 
 main {
@@ -268,7 +268,7 @@ main {
 #currentAct_Starters{
   grid-area: starters;
   text-align: right;
-  font-size: 2.4vh;
+  font-size: 4vh;
   list-style: none;
   display: grid;
   grid-auto-columns: max-content;
