@@ -45,6 +45,8 @@ async function renderCurrent(item) {
       actors.innerHTML = item.data.start.Registrants.map(r => r.User.name).join(
         " und "
       );
+    } else {
+      actors.innerHTML = "";
     }
     await setMainState(true);
   } else {
